@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.my.LoginActivity">
+
+
+    <RelativeLayout
+
+        android:id="@+id/rl_back"
+        android:layout_width="44dp"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/left_black"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab"
+        android:layout_below="@+id/rl_back"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+
+        app:tabIndicatorColor="@color/theme_common"
+        app:tabIndicatorHeight="2dp"
+        app:tabTextAppearance="@style/tabtextstyle"
+
+
+        app:tabSelectedTextColor="@color/theme_common"
+        app:tabTextColor="@color/gray1_33" />
+
+    <View
+        android:layout_below="@+id/tab"
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab"
+        android:layout_marginTop="6dp" />
+
+
+
+
+</RelativeLayout>

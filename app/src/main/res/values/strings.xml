@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Supermarket</string>
+
+
+    <string name="hot">首页</string>
+    <string name="all">理财</string>
+    <string name="discovery">发现</string>
+    <string name="me">我的</string>
+
+    <string name="share">分享</string>
+    <string name="cancel">取消</string>
+
+
+    <string name="login">登录</string>
+    <string name="reg">注册</string>
+    <string name="login_name_hint">请输入手机号码</string>
+    <string name="login_name_ver">验证码</string>
+    <string name="login_name_hint_ver">请输入验证码</string>
+    <string name="login_ver">获取验证码</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="investment_title">产品</string>
+
+    <array name="refresh_text">
+        <item>正在刷新</item>
+        <item>正在攻克地心引力，请稍后</item>
+        <item>正在刷新</item>
+
+    </array>
+
+</resources>

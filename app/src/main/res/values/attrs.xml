@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="titleBarRelativeLayout">
+        <attr name="tv_title_text" format="string"/>
+        <attr name="tv_right_title_text" format="string"/>
+        <attr name="tv_right_title_text_color" format="color"/>
+    </declare-styleable>
+
+
+</resources>

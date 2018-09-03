@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="white">#ffffffff</color>
+    <color name="blue">#017dc3</color>
+    <color name="yellow">#ffc746</color>
+
+
+    <color name="background">#f5f5f5</color>
+    <color name="all_view_line">#dcdddd</color>
+
+
+    <!--mainA -->
+    <color name="radioButton">#b1b0b0</color>
+
+
+    <color name="color_f7901e">#ff4239</color>
+    <color name="dotBalck">#80d9d8d8</color>
+
+    <color name="theme_common">#017dc3</color>
+
+
+    <!--透明-->
+    <color name="transparent">#00000000</color>
+    <!--半透明-->
+    <color name="transparent_half">#ae000000</color>
+    <color name="black">#000000</color>
+
+    <!--灰色-->
+    <color name="gray_21">#212121</color>
+    <color name="gray_01">#010101</color>
+    <color name="gray1_33">#333333</color>
+    <color name="gray2_99">#999999</color>
+    <color name="gray_66">#666666</color>
+    <color name="gray_ac">#acacac</color>
+    <color name="gray_b3">#b3b3b3</color>
+    <color name="gray_b6">#b6b6b6</color>
+    <color name="gray_b1">#b1b1b1</color>
+    <color name="gray_c2">#c2c2c2</color>
+</resources>
