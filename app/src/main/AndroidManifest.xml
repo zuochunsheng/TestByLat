@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.android.supermarket">
+    package="com.android.superplayer">
 
     <!-- 华为手机权限 -->
     <!-- <uses-permission android:name="android.permission.WRITE_CONTACTS" /> -->
@@ -67,6 +67,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
         <activity android:name=".ui.activity.my.NoticeListActivity"></activity>

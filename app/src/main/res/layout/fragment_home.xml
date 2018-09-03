@@ -8,14 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.HomeFragment">
 
-    <com.android.supermarket.pulltorefresh.RefreshLayout
+    <com.android.superplayer.pulltorefresh.RefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
         android:background="@color/white">
 
-        <com.android.supermarket.ui.widgit.MyScrollView
+        <com.android.superplayer.ui.widgit.MyScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -121,9 +121,9 @@
 
             </LinearLayout>
 
-        </com.android.supermarket.ui.widgit.MyScrollView>
+        </com.android.superplayer.ui.widgit.MyScrollView>
 
-    </com.android.supermarket.pulltorefresh.RefreshLayout>
+    </com.android.superplayer.pulltorefresh.RefreshLayout>
 
 
 
