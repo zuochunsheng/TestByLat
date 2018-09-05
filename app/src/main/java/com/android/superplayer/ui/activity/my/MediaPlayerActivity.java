@@ -68,11 +68,15 @@ public class MediaPlayerActivity extends BaseActivity {
     LinearLayout llBottom;
 
     private static final String flag_activity = "com.android.superplayer.Activity";
-    private MusicAdapter musicAdapter ;
+    private MusicAdapter musicAdapter;
     private List<MusicResult> oList;
 
     private Context context = this;
     private MusicResult music;
+
+    private int index = 0;
+
+    private int state = 0x11; // 0x11 : 为第一次播放歌曲  ；  0x12 : 暂停 ； 0x13  继续播放
 
     @Override
     protected int getLayoutId() {
@@ -111,19 +115,19 @@ public class MediaPlayerActivity extends BaseActivity {
 
     // 初始化数据
     private void initData() {
-        oList = MusicUtil.getMusicDate(this) ;
-        musicAdapter = new MusicAdapter(oList,this) ;
+        oList = MusicUtil.getMusicDate(this);
+        musicAdapter = new MusicAdapter(oList, this);
 
         listView.setAdapter(musicAdapter);
         listView.setOnItemClickListener(oClickListener);
 
         MyBroadcastActivity receiver = new MyBroadcastActivity();
         IntentFilter intentFilter = new IntentFilter(flag_activity);
-        registerReceiver(receiver,intentFilter);
+        registerReceiver(receiver, intentFilter);
 
         // 启动服务
         Intent intent = new Intent(context, MusicService.class);
-        startService(intent) ;
+        startService(intent);
 
 
     }
@@ -133,34 +137,48 @@ public class MediaPlayerActivity extends BaseActivity {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            index = position;//当前下标
             music = oList.get(position);
 
             Intent intent = new Intent("com.android.superplayer.Service");
-            intent.putExtra("music",music);
-            intent.putExtra("newmusic" ,1) ;// 1 新音乐 ；
+            intent.putExtra("music", music);
+            intent.putExtra("newmusic", 1);// 1 新音乐 ；
             sendBroadcast(intent);
 
 
         }
-    } ;
-
-
+    };
 
 
     /*
      *
      */
-    public class MyBroadcastActivity extends BroadcastReceiver{
+    public class MyBroadcastActivity extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
 
+            int state = intent.getIntExtra("state", -1);
+            switch (state) {
+                case 0x12: // 暂停的图片
+
+                    btnPlay.setImageResource(R.mipmap.all_no);
+                    break;
+
+                case 0x11:
+                case 0x13:// 播放的图片
+
+                    btnPlay.setImageResource(R.mipmap.all);
+                    break;
+            }
+
+
         }
+
     }
 
 
-
-    @OnClick({R.id.rl_back, R.id.tv_right, R.id.btn_top, R.id.btn_play, R.id.btn_bottom})
-    public void onViewClicked(View view) {
+    @OnClick({R.id.rl_back, R.id.tv_right})
+    public void onViewOtherClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
                 finish();
@@ -168,15 +186,56 @@ public class MediaPlayerActivity extends BaseActivity {
             case R.id.tv_right://播放模式
 
                 break;
+        }
+    }
+
+    @OnClick({R.id.btn_top, R.id.btn_play, R.id.btn_bottom})
+    public void onViewClicked(View view) {
+        Intent intent = new Intent("com.android.superplayer.Service");
+
+        switch (view.getId()) {
             case R.id.btn_top://上一曲
+                if (index == 0) {
+                    index = oList.size() - 1;
+                } else {
+                    index--;
+
+                }
+                music = oList.get(index);
+
+                intent.putExtra("music", music);
+                intent.putExtra("newmusic", 1);// 1 新音乐 ；
+
 
                 break;
-            case R.id.btn_play://刚进入播放 播放 暂停
+            case R.id.btn_play:// 播放 暂停 ,
+                if (music == null) {//如果当前没有播放歌曲 即第一次进入  播放第一首歌曲
+                    music = oList.get(index);// 0
+                    intent.putExtra("music", music);
+                    // intent.putExtra("newmusic", 1);// 1 新音乐 ；
+                }
+
+                intent.putExtra("isPlay", 1);//当前是否正在播放歌曲
 
                 break;
             case R.id.btn_bottom://下一曲
+                if (index == (oList.size() - 1)) {
+                    index = 0;
+                } else {
+                    index++;
+                }
+                music = oList.get(index);
+
+                intent.putExtra("music", music);
+                intent.putExtra("newmusic", 1);// 1 新音乐 ；
+
 
                 break;
+
+
         }
+        sendBroadcast(intent);
     }
+
+
 }
