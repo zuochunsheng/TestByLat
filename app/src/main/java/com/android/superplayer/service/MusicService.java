@@ -64,41 +64,10 @@ public class MusicService extends Service {
                 if (music != null) {
                     playMusic(music);
                     state = 0x12;
-                    // 将当前状态发送给 activity
-                    sendBroadToActivity();
-                }
-
-            }
-
-            int isPlay = intent.getIntExtra("isPlay", -1);//  三种状态
-            if (isPlay != -1) {
-                //0x11 : 为第一次播放歌曲  ；  0x12 : 暂停 ； 0x13  继续播放
-                switch (state) {
-                    case 0x11:
-                        music = (MusicResult) intent.getSerializableExtra("music");
-                        playMusic(music);
-                        state = 0x12;
-                        break;
-
-                    case 0x12:
-                        player.pause();
-                        state = 0x13;
-
-                        break;
-
-                    case 0x13:
-
-                        player.start();
-                        state = 0x12;
-                        break;
 
                 }
 
-                // 将当前状态发送给 activity
-                sendBroadToActivity();
-
             }
-
 
             int progress = intent.getIntExtra("progress", -1);
             if (progress != -1) {
@@ -108,6 +77,41 @@ public class MusicService extends Service {
                 player.seekTo(curposition);
 
             }
+
+
+            int isPlay = intent.getIntExtra("isPlay", -1);//  三种状态
+            if (isPlay != -1) {
+                //0x11 : 为第一次播放歌曲  ；  0x12 : 暂停 ； 0x13  继续播放
+                switch (state) {
+                    case 0x11:
+                        music = (MusicResult) intent.getSerializableExtra("music");
+                        playMusic(music);// 里面有改变状态的 action
+                        state = 0x12;
+                        break;
+
+                    case 0x12:
+                        player.pause();
+                        state = 0x13;
+
+                        // 将当前状态发送给 activity
+                        sendBroadToActivity();
+                        break;
+                    case 0x13:
+
+                        player.start();
+                        state = 0x12;
+                        // 将当前状态发送给 activity
+                        sendBroadToActivity();
+                        break;
+
+                }
+
+
+
+            }
+
+
+
 
 
         }
@@ -161,6 +165,7 @@ public class MusicService extends Service {
                                 Intent intent = new Intent("com.android.superplayer.Activity");
                                 intent.putExtra("curposition", curposition);
                                 intent.putExtra("duration", duration);
+                                intent.putExtra("state", state);
                                 sendBroadcast(intent);
                             } catch (Exception e) {
 
@@ -188,5 +193,12 @@ public class MusicService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+
+    @Override
+    public void unregisterReceiver(BroadcastReceiver receiver) {
+        unregisterReceiver(receiver);
+        super.unregisterReceiver(receiver);
     }
 }

@@ -1,14 +1,20 @@
 package com.android.superplayer.ui.activity.my;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -29,6 +35,7 @@ import com.android.superplayer.util.MusicUtil;
 import com.android.superplayer.util.ToastUtil;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,6 +85,11 @@ public class MediaPlayerActivity extends BaseActivity {
 
     private int state = 0x11; // 0x11 : 为第一次播放歌曲  ；  0x12 : 暂停 ； 0x13  继续播放
 
+    private int flag = 0;//播放模式  0 列表 , 1 单曲,  2 随机
+
+    private SharedPreferences sp;
+    private SharedPreferences.Editor edit;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_media_player;
@@ -86,6 +98,8 @@ public class MediaPlayerActivity extends BaseActivity {
     @Override
     protected void initViewAndData() {
 
+        sp = getSharedPreferences("com.android.superplayer.data", MODE_PRIVATE);
+        edit = sp.edit();
 
         checkExternalStoragePermission();
 
@@ -134,7 +148,10 @@ public class MediaPlayerActivity extends BaseActivity {
 
     }
 
-    private void seekBarOnChange(){
+    /*
+     *进度条
+     */
+    private void seekBarOnChange() {
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // 当拖动条正在拖动 调用该方法
@@ -153,8 +170,8 @@ public class MediaPlayerActivity extends BaseActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Intent intent = new Intent("com.android.superplayer.Service");
-               // intent.putExtra("music", music);
-               // intent.putExtra("newmusic", 1);// 1 新音乐 ；
+                // intent.putExtra("music", music);
+                // intent.putExtra("newmusic", 1);// 1 新音乐 ；
                 intent.putExtra("progress", seekBar.getProgress());//进度条位置 ；
                 sendBroadcast(intent);
 
@@ -206,39 +223,69 @@ public class MediaPlayerActivity extends BaseActivity {
             int curposition = intent.getIntExtra("curposition", -1);
             int duration = intent.getIntExtra("duration", -1);
 
-            if(curposition != -1){
-               seekBar.setProgress( (int)(curposition*1.0 /duration * 100));
+            if (curposition != -1) {
+                seekBar.setProgress((int) (curposition * 1.0 / duration * 100));
 
 
-               time.setText(inittime(curposition,duration));
+                time.setText(inittime(curposition, duration));
 
             }
 
             boolean over = intent.getBooleanExtra("over", false);
             if (over) {//
-                //播放模式  下一首
-                btnPlay.performClick() ;//触发事件
+                //播放模式  0 列表 , 1 单曲,  2 随机
+                Intent intent3 = new Intent("com.android.superplayer.Service");
+                switch (flag) {// 改变样式 ，作用 在播放完歌曲后 起作用
+                    case 0:
+                        if (index == (oList.size() - 1)) {
+                            index = 0;
+                        } else {
+                            index++;
+                        }
+
+                        break;
+
+                    case 1:
+
+                        break;
+
+                    case 2:
+                        index = new Random().nextInt(oList.size());
+
+                        break;
+
+                }
+                music = oList.get(index);
+
+                intent3.putExtra("music", music);
+                intent3.putExtra("newmusic", 1);// 1 新音乐 ；
+                sendBroadcast(intent3);
+
+                edit.putInt("index",index) ;
+                edit.commit();
 
             }
         }
 
     }
-    // 将毫秒 转为 分秒
-    private String inittime(int cur ,int dur){
-        int cur_fen = cur / 1000 / 60 ;// 分
-        int cur_miao = cur / 1000 % 60 ;// 秒
 
-        int dur_fen = cur / 1000 / 60 ;// 分
-        int dur_miao = cur / 1000 % 60 ;// 分
+    // 将毫秒 转为 分秒
+    private String inittime(int cur, int dur) {
+        int cur_fen = cur / 1000 / 60;// 分
+        int cur_miao = cur / 1000 % 60;// 秒
+
+        int dur_fen = dur / 1000 / 60;// 分
+        int dur_miao = dur / 1000 % 60;// 分
 
         // 01：20  ，10：21
-        return  getT(cur_fen)+":" + getT(cur_miao)  + "/"  + getT(dur_fen)+":" + getT(dur_miao);
+        return getT(cur_fen) + ":" + getT(cur_miao) + "/" + getT(dur_fen) + ":" + getT(dur_miao);
     }
-    private String getT(int time){
-        if(time < 10){
-           return  "0" +time;
-        }else {
-            return  "" +time;
+
+    private String getT(int time) {
+        if (time < 10) {
+            return "0" + time;
+        } else {
+            return "" + time;
         }
 
     }
@@ -250,9 +297,32 @@ public class MediaPlayerActivity extends BaseActivity {
             case R.id.rl_back:
                 finish();
                 break;
-            case R.id.tv_right://播放模式
+            case R.id.tv_right://播放模式  0 列表 , 1 单曲,  2 随机
+                flag++;
+                if (flag > 2) {
+                    flag = 0;
+                }
+
+                switch (flag) {// 改变样式 ，作用 在播放完歌曲后 起作用
+                    case 0:
+                        ToastUtil.showToastInUiThread(this, "列表循环");
+                        tvRight.setText("列表循环");
+                        break;
+
+                    case 1:
+                        ToastUtil.showToastInUiThread(this, "单曲循环");
+                        tvRight.setText("单曲循环");
+                        break;
+
+                    case 2:
+                        ToastUtil.showToastInUiThread(this, "随机播放");
+                        tvRight.setText("随机播放");
+                        break;
+
+                }
 
                 break;
+
         }
     }
 
@@ -300,9 +370,74 @@ public class MediaPlayerActivity extends BaseActivity {
                 break;
 
 
+
         }
         sendBroadcast(intent);
     }
 
 
+    // 作用待测试
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){ // 返回键 执行 home键的 功能
+            edit.putInt("state",state);
+            edit.putInt("index",index) ;
+            edit.commit();
+
+            Intent intent = new Intent(Intent.ACTION_MAIN) ;
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK) ;
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            return  true;
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE,0,1,"退出") ;
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        switch (item.getItemId()){
+            case 0:
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("提示");
+                builder.setMessage("你确定要退出应用么？");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(context,MusicService.class);
+                        stopService(intent);
+                        edit.clear();
+                        edit.commit();
+
+                        // 如果有线程 也要销毁
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
+                break;
+
+        }
+        return super.onMenuItemSelected(featureId, item);
+    }
+
+    // 注销广播
+    @Override
+    public void unregisterReceiver(BroadcastReceiver receiver) {
+        unregisterReceiver(receiver);
+        super.unregisterReceiver(receiver);
+
+    }
 }
