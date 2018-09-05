@@ -18,6 +18,7 @@
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -56,6 +57,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 权限 背景透明 -->
+        <activity
+            android:name=".permission.ShadowActivity"
+            android:theme="@android:style/Theme.Translucent" />
+
         <activity
             android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
@@ -67,10 +74,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
-        <activity android:name=".ui.activity.my.NoticeListActivity"></activity>
+        <activity android:name=".ui.activity.my.NoticeListActivity" />
+        <activity android:name=".ui.activity.my.MediaPlayerActivity"></activity>
+
+        <service android:name=".service.MusicService"/>
     </application>
 
 </manifest>

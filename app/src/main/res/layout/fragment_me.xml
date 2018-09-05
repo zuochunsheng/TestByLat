@@ -7,8 +7,9 @@
 
 
     <TextView
+        android:id="@+id/tv_goMediaPlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="me" />
+        android:text="MediaPlayerDemo" />
 
 </FrameLayout>

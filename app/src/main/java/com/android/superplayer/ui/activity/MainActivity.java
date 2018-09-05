@@ -190,13 +190,13 @@ public class MainActivity extends AppCompatActivity {
                 raViewPager.setCurrentItem(2, false);
                 break;
             case R.id.rb_me:
-                SharedPreferences sp = getSharedPreferences(Constant.SP_NAME, Context.MODE_PRIVATE);
-                boolean aBoolean = sp.getBoolean(Constant.SP_ISLOGIN, false);
-
-                if (!aBoolean) {
-                    goLogin();
-                    return;
-                }
+//                SharedPreferences sp = getSharedPreferences(Constant.SP_NAME, Context.MODE_PRIVATE);
+//                boolean aBoolean = sp.getBoolean(Constant.SP_ISLOGIN, false);
+//
+//                if (!aBoolean) {
+//                    goLogin();
+//                    return;
+//                }
 
                 raViewPager.setCurrentItem(3, false);
                 break;
