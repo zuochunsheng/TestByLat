@@ -9,7 +9,9 @@
     <TextView
         android:id="@+id/tv_goMediaPlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="MediaPlayerDemo" />
+        android:gravity="center_vertical"
+        android:layout_height="44dp"
+        android:text="MediaPlayerDemo音乐播放器" />
+
 
 </FrameLayout>

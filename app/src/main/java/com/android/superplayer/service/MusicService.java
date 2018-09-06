@@ -5,10 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
+import com.android.superplayer.config.LogUtil;
 import com.android.superplayer.service.entity.MusicResult;
 
 import java.io.IOException;
@@ -28,10 +31,11 @@ public class MusicService extends Service {
 
     private int curposition;
     private int duration;
+    private MyBroadcastReceiver receiver;
 
     @Override
     public void onCreate() {// 进行初始化操作
-        MyBroadcastReceiver receiver = new MyBroadcastReceiver();
+        receiver = new MyBroadcastReceiver();
         IntentFilter intentFilter = new IntentFilter(flag_service);
         registerReceiver(receiver, intentFilter);
 
@@ -43,7 +47,7 @@ public class MusicService extends Service {
                 intent.putExtra("over", true);
 
                 sendBroadcast(intent);
-                curposition = 0 ;
+                curposition = 0;
                 duration = 0;
 
             }
@@ -51,6 +55,11 @@ public class MusicService extends Service {
         super.onCreate();
 
 
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
     }
 
     public class MyBroadcastReceiver extends BroadcastReceiver {
@@ -90,7 +99,7 @@ public class MusicService extends Service {
                         break;
 
                     case 0x12:
-                        player.pause();
+                        player.pause();//暂停播放
                         state = 0x13;
 
                         // 将当前状态发送给 activity
@@ -98,7 +107,7 @@ public class MusicService extends Service {
                         break;
                     case 0x13:
 
-                        player.start();
+                        player.start();//继续播放
                         state = 0x12;
                         // 将当前状态发送给 activity
                         sendBroadToActivity();
@@ -107,11 +116,7 @@ public class MusicService extends Service {
                 }
 
 
-
             }
-
-
-
 
 
         }
@@ -137,11 +142,13 @@ public class MusicService extends Service {
             player.reset();
 
             try {
-                // 获取播放歌曲路径
+                // 获取播放歌曲路径  重新设置要播放的音频
                 player.setDataSource(music.getPath());
-                //  准备
+
+               // player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                //  准备 预加载音频
                 player.prepare();
-                // 播放
+                // 开始播放
                 player.start();
 
                 duration = player.getDuration();//获取当前歌曲时长
@@ -153,6 +160,7 @@ public class MusicService extends Service {
                     @Override
                     public void run() {
                         super.run();
+                        LogUtil.e(Thread.currentThread().getName()+"......run...");
 
                         while (curposition < duration) {
 
@@ -196,9 +204,37 @@ public class MusicService extends Service {
     }
 
 
-    @Override
-    public void unregisterReceiver(BroadcastReceiver receiver) {
-        unregisterReceiver(receiver);
-        super.unregisterReceiver(receiver);
+//    @Override
+//    public void unregisterReceiver(BroadcastReceiver receiver) {
+//        unregisterReceiver(receiver);
+//        super.unregisterReceiver(receiver);
+//    }
+
+
+    // 设置音量
+    private void setVolume() {
+        player.setVolume(0, 100);
+
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+        if (player.isPlaying()) {
+            player.stop();//停止音频的播放
+        }
+        player.release();//释放资源
+        player = null;
+
+
+        //关闭线程
+        Thread.currentThread().interrupt();
+        stopForeground(true);
+
+
+    }
+
+
 }

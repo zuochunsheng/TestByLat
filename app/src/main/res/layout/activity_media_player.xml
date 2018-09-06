@@ -133,4 +133,15 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/playaccelerometer"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@color/blue"
+        android:text="摇一摇打开"
+        android:layout_width="100dp"
+        android:layout_height="40dp" />
+
 </RelativeLayout>

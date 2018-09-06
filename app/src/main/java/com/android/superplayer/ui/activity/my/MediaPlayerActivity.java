@@ -2,6 +2,7 @@ package com.android.superplayer.ui.activity.my;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -9,9 +10,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,7 +56,7 @@ import butterknife.OnClick;
  * 播放模式 ： 列表循环， 单曲循环，随机播放
  */
 
-public class MediaPlayerActivity extends BaseActivity {
+public class MediaPlayerActivity extends BaseActivity implements SensorEventListener {
 
     @BindView(R.id.rl_back)
     RelativeLayout rlBack;
@@ -74,6 +81,9 @@ public class MediaPlayerActivity extends BaseActivity {
     @BindView(R.id.ll_bottom)
     LinearLayout llBottom;
 
+    @BindView(R.id.playaccelerometer)
+    TextView playaccelerometer;
+
     private static final String flag_activity = "com.android.superplayer.Activity";
     private MusicAdapter musicAdapter;
     private List<MusicResult> oList;
@@ -89,6 +99,13 @@ public class MediaPlayerActivity extends BaseActivity {
 
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
+    private MyBroadcastActivity receiver;
+
+
+    private SensorManager sensorManager = null;//传感器
+    private Vibrator vibrator = null;//震动
+
+    private int clicktime = 0;//摇一摇 accelerometer 切换
 
     @Override
     protected int getLayoutId() {
@@ -100,6 +117,27 @@ public class MediaPlayerActivity extends BaseActivity {
 
         sp = getSharedPreferences("com.android.superplayer.data", MODE_PRIVATE);
         edit = sp.edit();
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        //取得震动服务的句柄
+        vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
+        //加速度传感器（accelerometer）、陀螺仪（gyroscope）、环境光照传感器（light）、磁力传感器（magnetic field）、方向传感器（orientation）、压力传感器（pressure）、距离传感器（proximity）和温度传感器（temperature）。
+// http://www.open-open.com/lib/view/open1378259498734.html
+        sensorManager.registerListener(this,
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+
+        //摇一摇
+        if (sp.getInt("play_accelerometer", 0) == 0) {
+            //默认摇一摇是打开的
+            clicktime = 0;
+            playaccelerometer.setText("摇一摇关闭");
+            // playaccelerometer.setBackgroundResource(R.drawable.ic_alarm_on_black_24dp);
+        } else {
+            clicktime = 1;
+            playaccelerometer.setText("摇一摇打开");
+            // playaccelerometer.setBackgroundResource(R.drawable.ic_alarm_off_black_24dp);
+        }
 
         checkExternalStoragePermission();
 
@@ -137,7 +175,7 @@ public class MediaPlayerActivity extends BaseActivity {
 
         seekBarOnChange();
 
-        MyBroadcastActivity receiver = new MyBroadcastActivity();
+        receiver = new MyBroadcastActivity();
         IntentFilter intentFilter = new IntentFilter(flag_activity);
         registerReceiver(receiver, intentFilter);
 
@@ -234,38 +272,45 @@ public class MediaPlayerActivity extends BaseActivity {
             boolean over = intent.getBooleanExtra("over", false);
             if (over) {//
                 //播放模式  0 列表 , 1 单曲,  2 随机
-                Intent intent3 = new Intent("com.android.superplayer.Service");
-                switch (flag) {// 改变样式 ，作用 在播放完歌曲后 起作用
-                    case 0:
-                        if (index == (oList.size() - 1)) {
-                            index = 0;
-                        } else {
-                            index++;
-                        }
-
-                        break;
-
-                    case 1:
-
-                        break;
-
-                    case 2:
-                        index = new Random().nextInt(oList.size());
-
-                        break;
-
-                }
-                music = oList.get(index);
-
-                intent3.putExtra("music", music);
-                intent3.putExtra("newmusic", 1);// 1 新音乐 ；
-                sendBroadcast(intent3);
-
-                edit.putInt("index",index) ;
-                edit.commit();
+                setQiegeByFlag();
 
             }
         }
+
+    }
+
+    // 根据模式 切歌
+    private void setQiegeByFlag() {
+        Intent intent3 = new Intent("com.android.superplayer.Service");
+        switch (flag) {// 改变样式 ，作用 在播放完歌曲后 起作用
+            case 0:
+                if (index == (oList.size() - 1)) {
+                    index = 0;
+                } else {
+                    index++;
+                }
+
+                break;
+
+            case 1:
+
+                break;
+
+            case 2:
+                index = new Random().nextInt(oList.size());
+
+                break;
+
+        }
+        music = oList.get(index);
+
+        intent3.putExtra("music", music);
+        intent3.putExtra("newmusic", 1);// 1 新音乐 ；
+        sendBroadcast(intent3);
+
+        edit.putInt("index", index);
+        edit.commit();
+
 
     }
 
@@ -291,7 +336,7 @@ public class MediaPlayerActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rl_back, R.id.tv_right})
+    @OnClick({R.id.rl_back, R.id.tv_right,R.id.playaccelerometer})
     public void onViewOtherClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
@@ -321,6 +366,21 @@ public class MediaPlayerActivity extends BaseActivity {
 
                 }
 
+                break;
+            case R.id.playaccelerometer:
+                if(clicktime == 0){
+                    //当前是摇一摇打开的状态--> 关闭摇一摇
+                    clicktime = 1;
+                    //playaccelerometer.setBackgroundResource(R.drawable.ic_alarm_off_black_24dp);
+                    playaccelerometer.setText("摇一摇打开");
+                    edit.putInt("play_accelerometer", 1).commit();
+                }else {
+                    //关闭-->打开
+                    clicktime = 0;
+                    //playaccelerometer.setBackgroundResource(R.drawable.ic_alarm_on_black_24dp);
+                    playaccelerometer.setText("摇一摇关闭");
+                    edit.putInt("play_accelerometer", 0).commit();
+                }
                 break;
 
         }
@@ -370,7 +430,6 @@ public class MediaPlayerActivity extends BaseActivity {
                 break;
 
 
-
         }
         sendBroadcast(intent);
     }
@@ -379,16 +438,16 @@ public class MediaPlayerActivity extends BaseActivity {
     // 作用待测试
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){ // 返回键 执行 home键的 功能
-            edit.putInt("state",state);
-            edit.putInt("index",index) ;
+        if (keyCode == KeyEvent.KEYCODE_BACK) { // 返回键 执行 home键的 功能
+            edit.putInt("state", state);
+            edit.putInt("index", index);
             edit.commit();
 
-            Intent intent = new Intent(Intent.ACTION_MAIN) ;
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK) ;
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
-            return  true;
+            return true;
 
         }
 
@@ -397,14 +456,14 @@ public class MediaPlayerActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE,0,1,"退出") ;
+        menu.add(Menu.NONE, 0, 1, "退出");
 
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case 0:
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("提示");
@@ -412,7 +471,7 @@ public class MediaPlayerActivity extends BaseActivity {
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(context,MusicService.class);
+                        Intent intent = new Intent(context, MusicService.class);
                         stopService(intent);
                         edit.clear();
                         edit.commit();
@@ -434,10 +493,48 @@ public class MediaPlayerActivity extends BaseActivity {
     }
 
     // 注销广播
-    @Override
-    public void unregisterReceiver(BroadcastReceiver receiver) {
-        unregisterReceiver(receiver);
-        super.unregisterReceiver(receiver);
+//    @Override
+//    public void unregisterReceiver(BroadcastReceiver receiver) {
+//        unregisterReceiver(receiver);
+//        super.unregisterReceiver(receiver);
+//
+//    }
 
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if (sp.getInt("play_accelerometer", 0) == 0) {
+            // 传感器报告新的值
+            int sensorType = sensorEvent.sensor.getType();
+            //values[0]:X轴，values[1]：Y轴，values[2]：Z轴
+            float[] values = sensorEvent.values;
+            if (sensorType == Sensor.TYPE_ACCELEROMETER) {
+                if ((Math.abs(values[0]) > 17 || Math.abs(values[1]) > 17 || Math
+                        .abs(values[2]) > 17)) {
+                    Log.e("slack", "sensor x values[0] = " + values[0]);
+                    Log.e("slack", "sensor y values[1] = " + values[1]);
+                    Log.e("slack", "sensor z values[2] = " + values[2]);
+
+                    setQiegeByFlag();
+                    //摇动手机后，再伴随震动提示~~
+                    vibrator.vibrate(500);
+                }
+
+            }
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        //传感器精度的改变
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+        sensorManager.unregisterListener(this);
     }
 }
