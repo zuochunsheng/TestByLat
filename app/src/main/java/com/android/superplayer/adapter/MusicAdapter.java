@@ -73,28 +73,16 @@ public class MusicAdapter extends BaseAdapter {
         viewHoulder.author.setText(music.getAuthor());
         viewHoulder.duration.setText(getTime(music.getDuration()));
 
-//        rivate String name;//歌曲名
-//        private String author;//演唱者
-//
-//
-//
-//        private String path;//歌曲路径
-//        private long duration;//歌曲时长
-//
-//
-//        private int id;
-//        private String  album;
-//        private int  albumId;
-//        private long  size;
-        LogUtil.e("  --------- 单曲信息 -----------");
-        LogUtil.e("歌曲标题：" + music.getName());
-        LogUtil.e("歌曲编号：" + music.getId());//132483
-        LogUtil.e("歌曲的专辑名：" + music.getAlbum());// null
-        LogUtil.e("歌曲的专辑名id：" + music.getAlbumId());//42
-        LogUtil.e("歌曲的歌手名：" + music.getAuthor());
-        LogUtil.e("歌曲文件的路径：" + music.getPath());//   /storage/emulated/0/kgmusic/download/许嵩 - 断桥残雪.mp3
-        LogUtil.e("歌曲的总播放时长：" + getTime(music.getDuration()));
-        LogUtil.e("歌曲文件的大小：" + music.getSize()*1.0/1000 /1024 + "M");//m
+
+//        LogUtil.e("  --------- 单曲信息 -----------");
+//        LogUtil.e("歌曲标题：" + music.getName());
+//        LogUtil.e("歌曲编号：" + music.getId());//132483
+//        LogUtil.e("歌曲的专辑名：" + music.getAlbum());// null
+//        LogUtil.e("歌曲的专辑名id：" + music.getAlbumId());//42
+//        LogUtil.e("歌曲的歌手名：" + music.getAuthor());
+//        LogUtil.e("歌曲文件的路径：" + music.getPath());//   /storage/emulated/0/kgmusic/download/许嵩 - 断桥残雪.mp3
+//        LogUtil.e("歌曲的总播放时长：" + getTime(music.getDuration()));
+//        LogUtil.e("歌曲文件的大小：" + music.getSize()*1.0/1000 /1024 + "M");//m
 
         return view;
     }

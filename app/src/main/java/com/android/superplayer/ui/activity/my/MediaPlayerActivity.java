@@ -336,7 +336,7 @@ public class MediaPlayerActivity extends BaseActivity implements SensorEventList
     }
 
 
-    @OnClick({R.id.rl_back, R.id.tv_right,R.id.playaccelerometer})
+    @OnClick({R.id.rl_back, R.id.tv_right,R.id.playaccelerometer,R.id.click_share})
     public void onViewOtherClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
@@ -381,6 +381,15 @@ public class MediaPlayerActivity extends BaseActivity implements SensorEventList
                     playaccelerometer.setText("摇一摇关闭");
                     edit.putInt("play_accelerometer", 0).commit();
                 }
+                break;
+
+            case R.id.click_share:// 分享
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT,"我的博客地址：https://github.com/zuochunsheng/supermarket-java");
+                shareIntent.setType("text/plain");
+                //设置分享列表
+                startActivity(Intent.createChooser(shareIntent,"分享到"));
                 break;
 
         }

@@ -1,5 +1,7 @@
 package com.android.superplayer.service;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,12 +9,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.android.superplayer.R;
 import com.android.superplayer.config.LogUtil;
 import com.android.superplayer.service.entity.MusicResult;
+import com.android.superplayer.ui.activity.my.MediaPlayerActivity;
 
 import java.io.IOException;
 
@@ -24,6 +29,7 @@ public class MusicService extends Service {
 
 
     private static final String flag_service = "com.android.superplayer.Service";
+    private static final int NOTIFICATION_ID = 1; // 如果id设置为0,会导致不能设置为前台service
     private MediaPlayer player = new MediaPlayer();
     private MusicResult music;
 
@@ -32,9 +38,21 @@ public class MusicService extends Service {
     private int curposition;
     private int duration;
     private MyBroadcastReceiver receiver;
+    private Notification notification;
 
+
+    //    服务生命周期中主要有三个重要的阶段:
+//
+//   1)创建服务 onCreate
+//
+//   2)开始服务 onStartCommand
+//
+//   3)销毁服务  onDestroy
+//
+//    一个服务只会创建一次，销毁一次，但是会开始多次。
     @Override
     public void onCreate() {// 进行初始化操作
+        LogUtil.e("service onCreate()");
         receiver = new MyBroadcastReceiver();
         IntentFilter intentFilter = new IntentFilter(flag_service);
         registerReceiver(receiver, intentFilter);
@@ -59,7 +77,12 @@ public class MusicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        LogUtil.e("service onStartCommand()");
+
+
         return super.onStartCommand(intent, flags, startId);
+
+
     }
 
     public class MyBroadcastReceiver extends BroadcastReceiver {
@@ -117,6 +140,7 @@ public class MusicService extends Service {
 
 
             }
+            //notification(music);
 
 
         }
@@ -128,6 +152,39 @@ public class MusicService extends Service {
         Intent intent2 = new Intent("com.android.superplayer.Activity");
         intent2.putExtra("state", state);
         sendBroadcast(intent2);
+
+    }
+
+
+    //  自定义通知栏
+    private void notification(MusicResult music) {
+        if (music != null) {
+
+
+            String name = music.getName();
+
+            //开启前台service
+            notification = null;
+            if (Build.VERSION.SDK_INT < 16) {
+                notification = new Notification.Builder(this)
+                        .setContentTitle("Enter the MusicPlayer")
+                        .setContentText(name)
+                        .setSmallIcon(R.mipmap.hot).getNotification();
+            } else {
+                Notification.Builder builder = new Notification.Builder(this);
+                PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                        new Intent(this, MediaPlayerActivity.class), 0);
+                builder.setContentIntent(contentIntent);
+                builder.setSmallIcon(R.mipmap.hot);
+//        builder.setTicker("Foreground Service Start");
+                builder.setContentTitle("Enter the MusicPlayer");
+                builder.setContentText(name);
+                notification = builder.build();
+            }
+
+        }
+        startForeground(NOTIFICATION_ID, notification);
+
 
     }
 
@@ -145,7 +202,7 @@ public class MusicService extends Service {
                 // 获取播放歌曲路径  重新设置要播放的音频
                 player.setDataSource(music.getPath());
 
-               // player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                // player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 //  准备 预加载音频
                 player.prepare();
                 // 开始播放
@@ -160,7 +217,7 @@ public class MusicService extends Service {
                     @Override
                     public void run() {
                         super.run();
-                        LogUtil.e(Thread.currentThread().getName()+"......run...");
+                        LogUtil.e(Thread.currentThread().getName() + "......run...");
 
                         while (curposition < duration) {
 
