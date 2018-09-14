@@ -18,7 +18,6 @@
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -62,7 +61,6 @@
         <activity
             android:name=".permission.ShadowActivity"
             android:theme="@android:style/Theme.Translucent" />
-
         <activity
             android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
@@ -77,9 +75,13 @@
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
         <activity android:name=".ui.activity.my.NoticeListActivity" />
-        <activity android:name=".ui.activity.my.MediaPlayerActivity"></activity>
+        <activity android:name=".ui.activity.my.MediaPlayerActivity" />
 
-        <service android:name=".service.MusicService"/>
+        <service android:name=".service.MusicService" />
+
+        <activity android:name=".ui.activity.my.FFmpegActivity" />
+        <activity android:name=".ui.activity.my.LiveTelecastActivity" />
+        <activity android:name=".ui.activity.my.ExoPlayerActivity"></activity>
     </application>
 
 </manifest>

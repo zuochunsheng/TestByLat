@@ -50,4 +50,8 @@ dependencies {
 
     implementation 'com.bigkoo:convenientbanner:2.0.5'
 
+    //完整库
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.0'
+
+
 }

@@ -3,11 +3,16 @@ package com.android.superplayer.util;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import com.android.superplayer.service.entity.MusicResult;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,6 +167,7 @@ public class MusicUtil {
         return olist;
 
     }
+
 
 
 

@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 import com.android.superplayer.R;
 import com.android.superplayer.base.BaseFragment;
+import com.android.superplayer.ui.activity.my.ExoPlayerActivity;
+import com.android.superplayer.ui.activity.my.FFmpegActivity;
+import com.android.superplayer.ui.activity.my.LiveTelecastActivity;
 import com.android.superplayer.ui.activity.my.MediaPlayerActivity;
 import com.android.superplayer.util.ActivityUtil;
+import com.google.android.exoplayer2.ExoPlayer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +28,11 @@ public class MeFragment extends BaseFragment {
     @BindView(R.id.tv_goMediaPlay)
     TextView tvGoMediaPlay;
     Unbinder unbinder;
+    @BindView(R.id.tv_goliveTelecast)
+    TextView tvGoliveTelecast;
+    @BindView(R.id.tv_goFFmpeg)
+    TextView tvGoFFmpeg;
+
 
     @Override
     protected View fetchLayoutRes(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -36,11 +45,27 @@ public class MeFragment extends BaseFragment {
     }
 
 
-
-
     @OnClick(R.id.tv_goMediaPlay)
     public void onViewClicked() {
 
-        ActivityUtil.getInstance().onNext(this.getActivity() ,MediaPlayerActivity.class);
+        ActivityUtil.getInstance().onNext(this.getActivity(), MediaPlayerActivity.class);
+    }
+
+
+
+    @OnClick({R.id.tv_goliveTelecast, R.id.tv_goFFmpeg,R.id.tv_exoPlayer})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_goliveTelecast://直播
+                ActivityUtil.getInstance().onNext(this.getActivity(), LiveTelecastActivity.class);
+                break;
+            case R.id.tv_goFFmpeg://视频处理
+                ActivityUtil.getInstance().onNext(this.getActivity(), FFmpegActivity.class);
+                break;
+            case R.id.tv_exoPlayer: //ExoPlayer
+                ActivityUtil.getInstance().onNext(this.getActivity(), ExoPlayerActivity.class);
+                break;
+
+        }
     }
 }
