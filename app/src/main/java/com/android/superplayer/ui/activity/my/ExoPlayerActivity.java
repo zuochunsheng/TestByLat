@@ -23,7 +23,9 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
+import com.google.android.exoplayer2.source.ClippingMediaSource;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.LoopingMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
@@ -43,6 +45,7 @@ import java.util.Locale;
 
 /**
  * 视频播放
+ *
  * @author zuochunsheng
  * @time 2018/9/14 16:44
  */
@@ -53,11 +56,12 @@ public class ExoPlayerActivity extends BaseActivity {
 
     private SimpleExoPlayerView mExoPlayerView;
     private ProgressBar mProgressBar;
-    private Context context = this ;
+    private Context context = this;
 
 
     // 视频网络地址
     Uri playerUri = Uri.parse("https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4");
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_exo_player;
@@ -108,21 +112,41 @@ public class ExoPlayerActivity extends BaseActivity {
         // 生成用于解析媒体数据的Extractor实例。
         ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
 
-        // MediaSource代表要播放的媒体。
+        // MediaSource代表要播放的媒体。 可多个视频连续
         MediaSource videoSource = new ExtractorMediaSource(playerUri, dataSourceFactory, extractorsFactory,
                 null, null);
+
+        //要无限循环，通常最好使用ExoPlayer.setRepeatMode而不是LoopingMediaSource。
+        //LoopingMediaSource 无缝循环固定次数
+        // Plays the video twice.
+        //LoopingMediaSource loopingSource = new LoopingMediaSource(videoSource, 2);
+
+        // 剪辑视频
+        ClippingMediaSource clippingSource =
+                new ClippingMediaSource(
+                        videoSource,
+                        /* startPositionUs= */ 5_000_000,
+                        /* endPositionUs= */ 10_000_000);
+
+        //侧加载字幕文件
+
+
+
+
+
+
         //Prepare the player with the source.
         mSimpleExoPlayer.prepare(videoSource);
         //添加监听的listener
         // mSimpleExoPlayer.setVideoListener(mVideoListener);
         mSimpleExoPlayer.addListener(eventListener);
-       // mSimpleExoPlayer.setTextOutput(mOutput);
+        // mSimpleExoPlayer.setTextOutput(mOutput);
+
+        // 播放
         mSimpleExoPlayer.setPlayWhenReady(true);
 
 
-
     }
-
 
 
     //监听播放器的状态:
@@ -131,19 +155,22 @@ public class ExoPlayerActivity extends BaseActivity {
         public void onTimelineChanged(Timeline timeline, Object manifest) {
             LogUtil.e("onTimelineChanged");
         }
+
         @Override
         public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
             LogUtil.e("onTracksChanged");
         }
+
         @Override
         public void onLoadingChanged(boolean isLoading) {
             LogUtil.e("onLoadingChanged isLoading = " + isLoading);
         }
+
         @Override
         public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-            LogUtil.e("onPlayerStateChanged: playWhenReady = "+playWhenReady +" playbackState = "+playbackState);
+            LogUtil.e("onPlayerStateChanged: playWhenReady = " + playWhenReady + " playbackState = " + playbackState);
 
-            switch (playbackState){
+            switch (playbackState) {
                 case ExoPlayer.STATE_ENDED:
                     LogUtil.e("Playback ended!");
                     //Stop playback and return to start position
@@ -152,8 +179,8 @@ public class ExoPlayerActivity extends BaseActivity {
                     break;
                 case ExoPlayer.STATE_READY:
                     mProgressBar.setVisibility(View.GONE);
-                    LogUtil.e("ExoPlayer ready! pos: "+mSimpleExoPlayer.getCurrentPosition()
-                            +" max: "+stringForTime((int)mSimpleExoPlayer.getDuration()));
+                    LogUtil.e("ExoPlayer ready! pos: " + mSimpleExoPlayer.getCurrentPosition()
+                            + " max: " + stringForTime((int) mSimpleExoPlayer.getDuration()));
                     setProgress(0);
                     break;
                 case ExoPlayer.STATE_BUFFERING:
@@ -168,7 +195,7 @@ public class ExoPlayerActivity extends BaseActivity {
 
         @Override
         public void onRepeatModeChanged(int repeatMode) {
-            LogUtil.e("onRepeatModeChanged repeatMode =" +repeatMode);
+            LogUtil.e("onRepeatModeChanged repeatMode =" + repeatMode);
         }
 
         @Override
@@ -178,7 +205,7 @@ public class ExoPlayerActivity extends BaseActivity {
 
         @Override
         public void onPlayerError(ExoPlaybackException error) {
-            LogUtil.e("onPlaybackError: "+error.getMessage());
+            LogUtil.e("onPlaybackError: " + error.getMessage());
         }
 
         @Override
@@ -188,7 +215,7 @@ public class ExoPlayerActivity extends BaseActivity {
 
         @Override
         public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-            LogUtil.e("onPlaybackParametersChanged  playbackParameters = "+ playbackParameters.toString());
+            LogUtil.e("onPlaybackParametersChanged  playbackParameters = " + playbackParameters.toString());
         }
 
         @Override
@@ -199,7 +226,12 @@ public class ExoPlayerActivity extends BaseActivity {
     };
 
 
-    private void setPlayPause(boolean play){
+//    setPlayWhenReady开始和暂停播放，各种seekTo方法在媒体内寻找，
+//    setRepeatMode 控制媒体是否以及如何循环，
+//    setShuffleModeEnabled 控制播放列表改组，
+//    以及 setPlaybackParameters 调整播放速度和音高。
+
+    private void setPlayPause(boolean play) {
         mSimpleExoPlayer.setPlayWhenReady(play);
     }
 
@@ -221,15 +253,13 @@ public class ExoPlayerActivity extends BaseActivity {
     }
 
 
-
-
-
     @Override
     protected void onPause() {
         LogUtil.e("MainActivity.onPause.");
         super.onPause();
         mSimpleExoPlayer.stop();
     }
+
     @Override
     protected void onStop() {
         LogUtil.e("MainActivity.onStop.");
