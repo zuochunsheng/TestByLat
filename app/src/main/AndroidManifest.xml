@@ -66,11 +66,13 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
@@ -81,7 +83,17 @@
 
         <activity android:name=".ui.activity.my.FFmpegActivity" />
         <activity android:name=".ui.activity.my.LiveTelecastActivity" />
-        <activity android:name=".ui.activity.my.ExoPlayerActivity"></activity>
+        <activity android:name=".ui.activity.my.ExoPlayerActivity" />
+
+        <!-- 测试生命周期 -->
+        <activity android:name=".ui.activity.test.StringTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.test.BActivity"></activity>
     </application>
 
 </manifest>

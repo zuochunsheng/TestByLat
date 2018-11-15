@@ -40,6 +40,7 @@ public class MusicService extends Service {
     private MyBroadcastReceiver receiver;
     private Notification notification;
 
+    String linkUrl = "http://192.168.1.143/musicMenu/audio_1rlNNLnaZTKHzUWGqePA.m4a" ;
 
     //    服务生命周期中主要有三个重要的阶段:
 //
@@ -201,6 +202,7 @@ public class MusicService extends Service {
             try {
                 // 获取播放歌曲路径  重新设置要播放的音频
                 player.setDataSource(music.getPath());
+                //player.setDataSource(linkUrl);
 
                 // player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 //  准备 预加载音频

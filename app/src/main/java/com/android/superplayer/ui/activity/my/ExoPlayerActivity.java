@@ -61,6 +61,7 @@ public class ExoPlayerActivity extends BaseActivity {
 
     // 视频网络地址
     Uri playerUri = Uri.parse("https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4");
+   // Uri playerUri = Uri.parse("http://192.168.1.143/musicMenu/audio_1rlNNLnaZTKHzUWGqePA.m4a");
 
     @Override
     protected int getLayoutId() {
