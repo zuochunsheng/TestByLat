@@ -10,11 +10,14 @@ import com.android.superplayer.application.AndroidApplication;
 import com.android.superplayer.config.Constant;
 import com.android.superplayer.ui.activity.my.LoginActivity;
 import com.android.superplayer.util.ActivityUtil;
+import com.android.superplayer.util.request.RetrofitApiManager;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import rx.Subscriber;
 
 /**
  * Created by DELL on 2017/3/20.
@@ -22,33 +25,33 @@ import rx.Subscriber;
  * 错误统一处理
  */
 
-public class ExceptionSubscriber<T> extends Subscriber<T> {
+public class ExceptionSubscriber<T> implements Subscriber<T> {
 
 
     private SimpleCallback<T> simpleCallback;
     private Context application = AndroidApplication.getAppContext();
 
     private static final String error_401 = "401" ;//链接超时 ，重新登录
+    private String mRequestTag;
 
     public ExceptionSubscriber(SimpleCallback simpleCallback) {
         this.simpleCallback = simpleCallback;
         //this.application = application;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (simpleCallback != null) {
-            simpleCallback.onStart();
-        }
-    }
+    public ExceptionSubscriber(String requestTag) {
+        this.mRequestTag = requestTag;
 
-    @Override
-    public void onCompleted() {
-        if (simpleCallback != null) {
-            simpleCallback.onComplete();
-        }
     }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        if (simpleCallback != null) {
+//            simpleCallback.onStart();
+//        }
+//    }
+
+
 
     @Override
     public void onError(Throwable e) {
@@ -66,9 +69,24 @@ public class ExceptionSubscriber<T> extends Subscriber<T> {
         }
         if (simpleCallback != null) {
             simpleCallback.onComplete();
+            RetrofitApiManager.getInstance().remove(mRequestTag);
         }
     }
 
+    @Override
+    public void onComplete() {
+        if (simpleCallback != null) {
+            simpleCallback.onComplete();
+        }
+        RetrofitApiManager.getInstance().remove(mRequestTag);
+    }
+
+
+    @Override
+    public void onSubscribe(Subscription s) {
+        s.request(1);//网络请求一般也只有发送一次
+        RetrofitApiManager.getInstance().add(mRequestTag, s);//添加的网络请求管理中，方便取消或者 页面销毁时取消
+    }
 
     //这里 T 具体的类型,只要有异常 就会 执行onError
     @Override

@@ -3,15 +3,12 @@ package com.android.superplayer.service.manager;
 import android.content.Context;
 
 
-import com.android.superplayer.service.entity.BannerListBean;
-import com.android.superplayer.service.entity_wrap.LoginWBean;
 import com.android.superplayer.util.request.BaseRetrofit;
-import com.android.superplayer.util.response.BaseResponseFunc;
 
-import java.util.HashMap;
 
-import rx.Observable;
-import rx.schedulers.Schedulers;
+
+
+
 
 /**
  * Created by elu on 2018/3/30.
@@ -42,21 +39,21 @@ public class DataManager {
     //将retrofit的业务方法映射到DataManager中，以后统一用该类来调用业务方法
     //以后再retrofit中增加业务方法的时候，相应的这里也要添加，比如添加一个getOrder
 
-    public Observable<LoginWBean> reg(HashMap hashMap) {
-        return mRetrofitService.reg(hashMap)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .flatMap(new BaseResponseFunc<LoginWBean>());//结果筛选一次
-
-    }
-
-
-
-    public Observable<BannerListBean> getBannerList(HashMap hashMap) {
-        return mRetrofitService.getBannerList(hashMap)
-                .subscribeOn(Schedulers.io());
-
-    }
+//    public Observable<LoginWBean> reg(HashMap hashMap) {
+//        return mRetrofitService.reg(hashMap)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(Schedulers.newThread())
+//                .flatMap(new BaseResponseFunc<LoginWBean>());//结果筛选一次
+//
+//    }
+//
+//
+//
+//    public Observable<BannerListBean> getBannerList(HashMap hashMap) {
+//        return mRetrofitService.getBannerList(hashMap)
+//                .subscribeOn(Schedulers.io());
+//
+//    }
 
 
 

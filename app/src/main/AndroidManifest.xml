@@ -87,13 +87,23 @@
 
         <!-- 测试生命周期 -->
         <activity android:name=".ui.activity.test.StringTestActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <!--轮播-->
+        <activity android:name=".ui.activity.test.BActivity" />
+
+        <activity android:name=".ui.activity.test.RxJavaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.test.BActivity"></activity>
     </application>
 
 </manifest>

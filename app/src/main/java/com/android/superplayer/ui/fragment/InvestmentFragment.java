@@ -10,18 +10,23 @@ import android.view.ViewGroup;
 
 import com.android.superplayer.R;
 import com.android.superplayer.base.BaseFragment;
+import com.android.superplayer.config.ApplicationInterface;
 import com.android.superplayer.config.LogUtil;
+import com.android.superplayer.util.request.BaseRetrofit;
 import com.android.superplayer.util.request.BaseService;
 import com.android.superplayer.util.request.ParamRequest;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.squareup.okhttp.ResponseBody;
+
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 
 import butterknife.BindView;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 public class InvestmentFragment extends BaseFragment {
 
@@ -58,39 +63,69 @@ public class InvestmentFragment extends BaseFragment {
 //                name (string, optional): 搜索名称 ,
 //                status (integer, optional): 状态， 0 全部；1 进行中， 2 一结束 ,
 
-
-        BaseService.getBaseService()
-                .getProductList(requestDefaultHash)
-                .subscribeOn(Schedulers.newThread()) //子线程访问网络
-
-                .observeOn(AndroidSchedulers.mainThread()) //回调到主线程
+        BaseRetrofit.getInstance()
+                .post(ApplicationInterface.URL_PRODUCT_LIST,requestDefaultHash,ResponseBody.class)
                 .subscribe(new Subscriber<ResponseBody>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Subscription s) {
 
-                        LogUtil.e("成功");
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-
-                        LogUtil.e("失败");
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody ResponseBody) {
-
+                    public void onNext(ResponseBody responseBody) {
                         LogUtil.e("next 产品列表");
                         try {
-                            LogUtil.e(ResponseBody.string());
+                            LogUtil.e(responseBody.string());
                             //dealWelfareSuccess(discoverBean);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }
 
+                    @Override
+                    public void onError(Throwable t) {
+                        LogUtil.e("失败");
+                    }
 
+                    @Override
+                    public void onComplete() {
+                        LogUtil.e("成功");
                     }
                 });
+
+//        BaseService.getBaseService()
+//                .getProductList(requestDefaultHash)
+//
+//                .subscribeOn(Schedulers.newThread()) //子线程访问网络
+//
+//                .observeOn(AndroidSchedulers.mainThread()) //回调到主线程
+//                .subscribe(new Subscriber<ResponseBody>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                        LogUtil.e("成功");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                        LogUtil.e("失败");
+//                    }
+//
+//                    @Override
+//                    public void onNext(ResponseBody ResponseBody) {
+//
+//                        LogUtil.e("next 产品列表");
+//                        try {
+//                            LogUtil.e(ResponseBody.string());
+//                            //dealWelfareSuccess(discoverBean);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//
+//
+//                    }
+//                });
 
 
     }

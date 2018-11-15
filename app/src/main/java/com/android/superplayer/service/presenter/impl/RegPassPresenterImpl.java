@@ -2,19 +2,23 @@ package com.android.superplayer.service.presenter.impl;
 
 import android.content.Context;
 
+import com.android.superplayer.config.ApplicationInterface;
 import com.android.superplayer.config.LogUtil;
+import com.android.superplayer.service.entity.LoginBean;
 import com.android.superplayer.service.entity_wrap.LoginWBean;
 import com.android.superplayer.service.manager.DataManager;
 import com.android.superplayer.service.presenter.BasePresenter;
 import com.android.superplayer.service.presenter.IRegPassPresenter;
 import com.android.superplayer.service.view.impl.IRegPassView;
+import com.android.superplayer.util.request.BaseRetrofit;
 import com.android.superplayer.util.response.ExceptionSubscriber;
 import com.android.superplayer.util.response.SimpleCallback;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.HashMap;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * 对结果筛选一次
@@ -99,22 +103,31 @@ public class RegPassPresenterImpl extends BasePresenter implements IRegPassPrese
 //                }));
 
 
-        super.mCompositeSubscription.add(DataManager.getInstance(context)
-                .reg(requestBody)
-                .subscribeOn(Schedulers.io())
 
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ExceptionSubscriber<LoginWBean>(new SimpleCallback<LoginWBean>() {// 统一异常处理
+
+
+        BaseRetrofit.getInstance()
+                .post(ApplicationInterface.URL_USERS_REG,requestBody, LoginWBean.class)
+                .subscribe(new Subscriber<LoginWBean>() {
                     @Override
-                    public void onStart() {// 请求之前 的操作 比如弹框
+                    public void onSubscribe(Subscription s) {
 
                     }
 
                     @Override
-                    public void onNext(LoginWBean loginNWBean1) {
+                    public void onNext(LoginWBean loginBean) {
+                        //网络请求成功 有返回 不管对错
+                        LogUtil.e("next bannerList mCompositeSubscription");
+
                         LogUtil.e("onNext reg 返回解刨200 之后的数据");
-                        LogUtil.e(loginNWBean1);
-                        loginNWBean = loginNWBean1;
+                        LogUtil.e(loginBean);
+                        loginNWBean = loginBean;
+
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        LogUtil.e("网络请求失败：" + t.getMessage());
                     }
 
                     @Override
@@ -123,13 +136,41 @@ public class RegPassPresenterImpl extends BasePresenter implements IRegPassPrese
                             activity.regPassResultInfo(loginNWBean);
                         }
                     }
+                });
 
-                    @Override
-                    public void onError() {//异常 在统一异常中处理 吐司
 
-                    }
-                }))
-        );
+
+//        super.mCompositeSubscription.add(DataManager.getInstance(context)
+//                .reg(requestBody)
+//                .subscribeOn(Schedulers.io())
+//
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new ExceptionSubscriber<LoginWBean>(new SimpleCallback<LoginWBean>() {// 统一异常处理
+//                    @Override
+//                    public void onStart() {// 请求之前 的操作 比如弹框
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(LoginWBean loginNWBean1) {
+//                        LogUtil.e("onNext reg 返回解刨200 之后的数据");
+//                        LogUtil.e(loginNWBean1);
+//                        loginNWBean = loginNWBean1;
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        if (loginNWBean != null) {
+//                            activity.regPassResultInfo(loginNWBean);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError() {//异常 在统一异常中处理 吐司
+//
+//                    }
+//                }))
+//        );
 
 
     }

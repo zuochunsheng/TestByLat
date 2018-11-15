@@ -2,23 +2,23 @@ package com.android.superplayer.service.presenter.impl;
 
 import android.content.Context;
 
+import com.android.superplayer.config.ApplicationInterface;
 import com.android.superplayer.config.LogUtil;
 import com.android.superplayer.model.IModel;
 import com.android.superplayer.model.impl.ModelImpl;
+import com.android.superplayer.service.entity.BannerListBean;
 import com.android.superplayer.service.entity.LoginBean;
 import com.android.superplayer.service.presenter.ILoginPassPresenter;
 import com.android.superplayer.service.view.impl.ILoginPassView;
-import com.android.superplayer.util.request.BaseService;
-import com.android.superplayer.util.response.OnResponListener;
-import com.squareup.okhttp.ResponseBody;
+import com.android.superplayer.util.request.BaseRetrofit;
+
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * 直接返回
@@ -58,39 +58,75 @@ public class LoginPassPresenterImpl implements ILoginPassPresenter {
 //        }, true);
 
 
-        BaseService.getBaseService()
-                .login(requestBody)
-                .subscribeOn(Schedulers.newThread()) //子线程访问网络
 
-                .observeOn(AndroidSchedulers.mainThread()) //回调到主线程
+        BaseRetrofit.getInstance()
+                .post(ApplicationInterface.URL_USERS_LOGIN,requestBody, LoginBean.class)
                 .subscribe(new Subscriber<LoginBean>() {
                     @Override
-                    public void onCompleted() {
-                        //LogUtil.e("成功");
+                    public void onSubscribe(Subscription s) {
+
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        LogUtil.e("网络请求失败：" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(LoginBean responseBody) {
+                    public void onNext(LoginBean loginBean) {
                         //网络请求成功 有返回 不管对错
-                        LogUtil.e("next login");
+                        LogUtil.e("next bannerList mCompositeSubscription");
 
                         try {
                             //String s = responseBody.string();//不能用 toString() ;
 
-                            LogUtil.e(responseBody);// 值为null 的不会打印出来
-                            activity.loginPassResultInfo(responseBody);
+                            LogUtil.e(loginBean);// 值为null 的不会打印出来
+                            activity.loginPassResultInfo(loginBean);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }
 
+                    @Override
+                    public void onError(Throwable t) {
+                        LogUtil.e("网络请求失败：" + t.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
 
                     }
                 });
+
+
+//        BaseService.getBaseService()
+//                .login(requestBody)
+//                .subscribeOn(Schedulers.newThread()) //子线程访问网络
+//
+//                .observeOn(AndroidSchedulers.mainThread()) //回调到主线程
+//                .subscribe(new Subscriber<LoginBean>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        //LogUtil.e("成功");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        LogUtil.e("网络请求失败：" + e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onNext(LoginBean responseBody) {
+//                        //网络请求成功 有返回 不管对错
+//                        LogUtil.e("next login");
+//
+//                        try {
+//                            //String s = responseBody.string();//不能用 toString() ;
+//
+//                            LogUtil.e(responseBody);// 值为null 的不会打印出来
+//                            activity.loginPassResultInfo(responseBody);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//
+//
+//                    }
+//                });
 
 
     }
