@@ -45,17 +45,14 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.tv_goMediaPlay)
-    public void onViewClicked() {
-
-        ActivityUtil.getInstance().onNext(this.getActivity(), MediaPlayerActivity.class);
-    }
 
 
-
-    @OnClick({R.id.tv_goliveTelecast, R.id.tv_goFFmpeg,R.id.tv_exoPlayer})
+    @OnClick({R.id.tv_goliveTelecast, R.id.tv_goFFmpeg, R.id.tv_exoPlayer, R.id.tv_goMediaPlay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_goMediaPlay://音乐播放器
+                ActivityUtil.getInstance().onNext(this.getActivity(), MediaPlayerActivity.class);
+                break;
             case R.id.tv_goliveTelecast://直播
                 ActivityUtil.getInstance().onNext(this.getActivity(), LiveTelecastActivity.class);
                 break;
@@ -65,6 +62,7 @@ public class MeFragment extends BaseFragment {
             case R.id.tv_exoPlayer: //ExoPlayer
                 ActivityUtil.getInstance().onNext(this.getActivity(), ExoPlayerActivity.class);
                 break;
+
 
         }
     }

@@ -67,22 +67,24 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
         <activity android:name=".ui.activity.my.NoticeListActivity" />
+        <!--音乐播放器-->
         <activity android:name=".ui.activity.my.MediaPlayerActivity" />
-
         <service android:name=".service.MusicService" />
 
         <activity android:name=".ui.activity.my.FFmpegActivity" />
+        <!--直播-->
         <activity android:name=".ui.activity.my.LiveTelecastActivity" />
+        <!--视频播放-->
         <activity android:name=".ui.activity.my.ExoPlayerActivity" />
 
         <!-- 测试生命周期 -->
@@ -97,12 +99,13 @@
         <!--轮播-->
         <activity android:name=".ui.activity.test.BActivity" />
 
+        <!--rx语法-->
         <activity android:name=".ui.activity.test.RxJavaActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

@@ -42,12 +42,12 @@
         android:gravity="center"
         android:textColor="@color/blue"
         android:background="@color/gray_b3"
-        android:text="测试3"
+        android:text="测试3-倒计时"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"/>
 
-    <TextView
+    <com.android.superplayer.ui.widgit.FutureStudioView
         android:id="@+id/text4"
         android:gravity="center"
         android:textColor="@color/blue"
