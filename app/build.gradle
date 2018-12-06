@@ -57,5 +57,8 @@ dependencies {
     //完整库
     implementation 'com.google.android.exoplayer:exoplayer:2.6.0'
 
+    //直播  无用
+    //implementation 'com.laifeng:sopcast-sdk:1.0.4'
+
 
 }
