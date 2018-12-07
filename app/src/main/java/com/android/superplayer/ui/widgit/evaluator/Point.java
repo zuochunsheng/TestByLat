@@ -1,0 +1,28 @@
+package com.android.superplayer.ui.widgit.evaluator;
+
+/**
+ * anther: created by zuochunsheng on 2018/12/6 14 : 13
+ * descript :圆的点坐标
+ */
+public class Point {
+    // 设置两个变量用于记录坐标的位置
+    private float x;
+    private float y;
+
+    // 构造方法用于设置坐标
+    public Point(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // get方法用于获取坐标
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+
+}
