@@ -1,14 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.test.BActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:text="B  Activity"
-        android:layout_width="200dp"
-        android:layout_height="100dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.activity.test.BActivity">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="B  Activity" />
+
+        <ImageView
+            android:id="@+id/blurTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/cropCircleTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+        <ImageView
+            android:id="@+id/roundedCornersTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/maskTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/grayscaleTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+        <!--六-->
+
+
+        <ImageView
+            android:layout_marginTop="40dp"
+            android:id="@+id/toonFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/sepiaFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+        <ImageView
+            android:id="@+id/contrastFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/invertFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/pixelationFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+
+
+
+
+
+        <!--最后5条-->
+
+
+        <ImageView
+            android:layout_marginTop="40dp"
+            android:id="@+id/sketchFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/swirlFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+        <ImageView
+            android:id="@+id/brightnessFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/kuwaharaFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+
+
+        <ImageView
+            android:id="@+id/vignetteFilterTransformation"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue" />
+    </LinearLayout>
+</ScrollView>
