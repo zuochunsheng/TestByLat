@@ -23,11 +23,11 @@
         </com.android.superplayer.ui.widgit.ViewPagerIndicate>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="2dp"
-        android:background="#D5D5D5" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:background="#D5D5D5" />-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"

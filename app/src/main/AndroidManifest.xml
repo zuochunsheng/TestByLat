@@ -115,6 +115,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+        <!-- glide -->
         <activity android:name=".ui.activity.test.BActivity" />
 
         <!-- rx语法 -->
@@ -137,6 +138,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+        <!-- 动画 -->
         <activity android:name=".ui.activity.test.giftActivity">
 
             <!-- <intent-filter> -->
@@ -149,14 +151,24 @@
         <!--  -->
         <!-- 蓝牙 -->
         <activity android:name=".ui.activity.test.BluetoothActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <!-- 仿网易云 tab -->
+        <activity android:name=".ui.activity.test.ViewPageIndicatorActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <!--仿网易云 tab-->
-        <activity android:name=".ui.activity.test.ViewPageIndicatorActivity">
+        <!--﻿悬浮在整个app 上的按钮-->
+        <activity android:name=".ui.activity.test.AppFloatActionButtonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

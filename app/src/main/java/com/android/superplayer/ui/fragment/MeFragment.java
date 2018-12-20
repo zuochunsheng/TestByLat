@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.android.superplayer.R;
 import com.android.superplayer.base.BaseFragment;
+import com.android.superplayer.config.LogUtil;
 import com.android.superplayer.ui.activity.my.ExoPlayerActivity;
 import com.android.superplayer.ui.activity.my.FFmpegActivity;
 import com.android.superplayer.ui.activity.my.LiveTelecastActivity;
@@ -27,7 +28,7 @@ public class MeFragment extends BaseFragment {
 
     @BindView(R.id.tv_goMediaPlay)
     TextView tvGoMediaPlay;
-    Unbinder unbinder;
+
     @BindView(R.id.tv_goliveTelecast)
     TextView tvGoliveTelecast;
     @BindView(R.id.tv_goFFmpeg)
@@ -41,6 +42,11 @@ public class MeFragment extends BaseFragment {
 
     @Override
     protected void initialize(Bundle savedInstanceState) {
+
+        //获取Activity传递过来的参数
+        Bundle mBundle = getArguments();
+        String title = mBundle.getString("arg");
+        LogUtil.e("title = " + title);
 
     }
 

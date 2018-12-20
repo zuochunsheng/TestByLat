@@ -12,6 +12,8 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.superplayer.util.ResourceUtil;
+
 import java.util.ArrayList;
 
 /**
@@ -40,12 +42,17 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
     private Paint mPaint;
     //下划线的位置
     private float mTranslateX;
+    private int currentPosition;// 选择的
 
+    public ViewPagerIndicate(Context context) {
+        this(context, null);
+    }
     public ViewPagerIndicate(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mPaint = new Paint();
+        //mPaint.setTextSize(ResourceUtil.dp2px(mContext.getResources(),14f));
         isMeasureOk = isDrawOK = false;
     }
 
@@ -77,6 +84,7 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
             tv.setOnClickListener(this);
             mTextViews.add(tv);
         }
+        currentPosition = 0 ;
         setTextHighlight(0);
     }
 
@@ -92,6 +100,23 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
                 mTextViews.get(i).setTextColor(mTextNormalColor);
             }
         }
+
+
+    }
+
+
+    // 只最后一项  有效
+    private void setTextSizeHighlight(int pos) {
+        for (int i = 0; i < mTextViews.size(); i++) {
+            if (i == pos) {
+               // mTextViews.get(pos).getPaint().setTextSize(ResourceUtil.dp2px(mContext.getResources(),16f) );//TypedValue.COMPLEX_UNIT_SP
+                mTextViews.get(pos).setTextSize(TypedValue.COMPLEX_UNIT_SP,16f);//TypedValue.COMPLEX_UNIT_SP
+            } else {
+               // mTextViews.get(pos).getPaint().setTextSize(ResourceUtil.dp2px(mContext.getResources(),14f));
+                mTextViews.get(pos).setTextSize(TypedValue.COMPLEX_UNIT_SP,14f);
+            }
+        }
+
     }
 
     /**
@@ -124,6 +149,8 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
                 TextView tv = (TextView) mWapper.getChildAt(0);
                 mTabWidth = tv.getMeasuredWidth();
                 mTabHeight = tv.getMeasuredHeight();
+
+
             }
             isMeasureOk = false;
         }
@@ -145,6 +172,7 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
      */
     private void drawUnderline(int pos) {
         mTranslateX = pos * mTabWidth;
+
         invalidate();
     }
 
@@ -155,9 +183,16 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
             //改变下划线的位置
             canvas.translate(mTranslateX, 0);
             //绘制下划线
-            canvas.drawLine(0, mTabHeight, mTabWidth, mTabHeight, mPaint);
+            //canvas.drawLine(0, mTabHeight, mTabWidth, mTabHeight, mPaint);
+
         }
     }
+
+//    @Override
+//    protected void onDraw(Canvas canvas) {
+//        super.onDraw(canvas);
+//        setTextSizeHighlight(currentPosition);
+//    }
 
     /**
      * 重置ViewPager
@@ -168,6 +203,7 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
             /*ViewPager某项被选中*/
             @Override
             public void onPageSelected(int position) {
+                currentPosition = position;
                 //高亮该项文字
                 setTextHighlight(position);
             }
@@ -194,7 +230,9 @@ public class ViewPagerIndicate  extends HorizontalScrollView implements View.OnC
         //让当前标签总是显示在第二个位置
         smoothScrollTo((pos - 1) * mTabWidth, 0);
         drawUnderline(pos);
+
         mViewPager.setCurrentItem(pos, false);
+
     }
 
 }

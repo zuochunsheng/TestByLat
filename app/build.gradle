@@ -67,4 +67,5 @@ dependencies {
         exclude group: 'com.android.support'
     }
     //implementation 'fr.baloomba:viewpagerindicator:2.4.2'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

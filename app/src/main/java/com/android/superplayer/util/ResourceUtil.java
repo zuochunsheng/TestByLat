@@ -1,6 +1,7 @@
 package com.android.superplayer.util;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -30,4 +31,16 @@ public class ResourceUtil {
             return context.getResources().getDrawable(id);
         }
     }
+
+
+    public static float dp2px(Resources resources, float dp) {
+        final float scale = resources.getDisplayMetrics().density;
+        return dp * scale + 0.5f;
+    }
+
+    public static float sp2px(Resources resources, float sp) {
+        final float scale = resources.getDisplayMetrics().scaledDensity;
+        return sp * scale;
+    }
+
 }
