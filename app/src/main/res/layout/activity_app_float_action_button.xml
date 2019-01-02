@@ -7,20 +7,81 @@
     tools:context=".ui.activity.test.AppFloatActionButtonActivity">
 
     <LinearLayout
-        android:background="@color/black"
+        android:orientation="vertical"
+        android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/skip"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:gravity="center"
             android:background="@color/yellow"
             android:textColor="@color/white"
-            android:text="跳转"
+            android:text="跳转----------跳转------跳转------"
             android:layout_width="200dp"
             android:layout_height="100dp" />
 
+
+
+        <com.android.superplayer.ui.widgit.VerticalMarqueeView
+            android:background="@color/color_f7901e"
+            android:id="@+id/vmView"
+            android:layout_width="200dp"
+            android:layout_height="30dp" />
+
+        <app.demo.com.autotextlib.AutoVerticalScrollTextView
+            android:id="@+id/auto_text"
+            android:layout_marginTop="50dp"
+            app:textColor="#ffffff"
+            app:textSize="18sp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="60dp"
+            android:layout_height="wrap_content"
+            android:background="#ff00ff"
+            android:layout_width="match_parent" />
+
+
+
+
     </LinearLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal|bottom"
+        android:layout_width="200dp"
+        android:layout_height="200dp">
+
+
+        <ImageView
+            android:id="@+id/imageView_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@mipmap/me"/>
+        <ImageView
+            android:id="@+id/imageView_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/me"/>
+        <ImageView
+            android:id="@+id/imageView_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/me"/>
+        <ImageView
+            android:id="@+id/imageView_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/me_no"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>
