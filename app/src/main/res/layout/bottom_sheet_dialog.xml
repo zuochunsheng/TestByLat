@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_bottomsheet_photolist"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:textColor="@color/gray1_33"
+        android:gravity="center"
+        android:text="@string/bottom_sheet_photolist"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <View
+        android:background="@color/all_view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/tv_bottomsheet_takephoto"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@color/gray1_33"
+        android:text="@string/bottom_sheet_takephoto"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+
+    <View
+        android:background="@color/all_view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <TextView
+        android:id="@+id/tv_bottomsheet_cancel"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/gray_66"
+        android:text="@string/cancle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+</LinearLayout>

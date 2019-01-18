@@ -14,6 +14,7 @@ import com.android.superplayer.config.LogUtil;
 import com.android.superplayer.eventbus.EBBean;
 import com.android.superplayer.eventbus.EBConst;
 import com.android.superplayer.ui.activity.MainActivity;
+import com.android.superplayer.ui.activity.my.PictureActivity;
 import com.android.superplayer.ui.widgit.FloatView2;
 import com.android.superplayer.ui.widgit.VerticalMarqueeView;
 import com.android.superplayer.util.ActivityUtil;
@@ -131,7 +132,8 @@ public class AppFloatActionButtonActivity extends BaseActivity implements View.O
 
     @OnClick(R.id.skip)
     public void onViewClicked() {
-        ActivityUtil.getInstance().onNext(this, ViewPageIndicatorActivity.class);
+       // ActivityUtil.getInstance().onNext(this, ViewPageIndicatorActivity.class);
+        ActivityUtil.getInstance().onNext(this, PictureActivity.class);
 
     }
 

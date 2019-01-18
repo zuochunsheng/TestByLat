@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--照片-->
+    <!--物理路径相当于Environment.getExternalStorageDirectory() + /Pictures/。-->
+    <external-path
+        name="my_images"
+        path="Pictures"/>
+
+    <!--下载-->
+    <paths>
+        <external-path
+            name="download"
+            path=""/>
+    </paths>
+</paths>

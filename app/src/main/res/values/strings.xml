@@ -30,4 +30,7 @@
 
     </array>
 
+    <string name="bottom_sheet_photolist">从相册选择</string>
+    <string name="bottom_sheet_takephoto">拍一张</string>
+    <string name="cancle">取消</string>
 </resources>

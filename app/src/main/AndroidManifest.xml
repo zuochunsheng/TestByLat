@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.android.superplayer">
-
     <!-- 直播的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -14,17 +13,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.autofocus" />
-
-    <!-- 华为手机权限 -->
+    <uses-feature android:name="android.hardware.autofocus" /> <!-- 华为手机权限 -->
     <!-- <uses-permission android:name="android.permission.WRITE_CONTACTS" /> -->
     <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
-
-    <!-- 震动 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- 访问网络,网络定位需要上网 -->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" /> <!-- 震动 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 访问网络,网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission
@@ -33,10 +27,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
-
-
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <!-- 拨打电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
@@ -48,14 +39,10 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
-
-    <!-- 分享权限 -->
+        tools:ignore="ProtectedPermissions" /> <!-- 分享权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -78,6 +65,10 @@
         <activity
             android:name=".permission.ShadowActivity"
             android:theme="@android:style/Theme.Translucent" />
+        <!-- 拍照 背景透明 -->
+        <activity
+            android:name=".takephoto.ShadowActivity"
+            android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
@@ -93,19 +84,14 @@
         </activity>
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
-        <activity android:name=".ui.activity.my.NoticeListActivity" />
-        <!-- 音乐播放器 -->
+        <activity android:name=".ui.activity.my.NoticeListActivity" /> <!-- 音乐播放器 -->
         <activity android:name=".ui.activity.my.MediaPlayerActivity" />
 
         <service android:name=".service.MusicService" />
 
-        <activity android:name=".ui.activity.my.FFmpegActivity" />
-        <!-- 直播 -->
-        <activity android:name=".ui.activity.my.LiveTelecastActivity" />
-        <!-- 视频播放 -->
-        <activity android:name=".ui.activity.my.ExoPlayerActivity" />
-
-        <!-- 测试生命周期 -->
+        <activity android:name=".ui.activity.my.FFmpegActivity" /> <!-- 直播 -->
+        <activity android:name=".ui.activity.my.LiveTelecastActivity" /> <!-- 视频播放 -->
+        <activity android:name=".ui.activity.my.ExoPlayerActivity" /> <!-- 测试生命周期 -->
         <activity android:name=".ui.activity.test.StringTestActivity">
 
             <!-- <intent-filter> -->
@@ -114,11 +100,8 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-        <!-- glide -->
-        <activity android:name=".ui.activity.test.BActivity" />
-
-        <!-- rx语法 -->
+        </activity> <!-- glide -->
+        <activity android:name=".ui.activity.test.BActivity" /> <!-- rx语法 -->
         <activity android:name=".ui.activity.test.RxJavaActivity">
 
             <!-- <intent-filter> -->
@@ -127,8 +110,7 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-        <!-- 属性动画 -->
+        </activity> <!-- 属性动画 -->
         <activity android:name=".ui.activity.test.AnimatorActivity">
 
             <!-- <intent-filter> -->
@@ -137,8 +119,7 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-        <!-- 动画 -->
+        </activity> <!-- 动画 -->
         <activity android:name=".ui.activity.test.giftActivity">
 
             <!-- <intent-filter> -->
@@ -147,8 +128,7 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-        <!--  -->
+        </activity> <!--  -->
         <!-- 蓝牙 -->
         <activity android:name=".ui.activity.test.BluetoothActivity">
 
@@ -158,23 +138,48 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-        <!-- 仿网易云 tab -->
+        </activity> <!-- 仿网易云 tab -->
         <activity android:name=".ui.activity.test.ViewPageIndicatorActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity> <!-- ﻿悬浮在整个app 上的按钮 -->
+        <activity android:name=".ui.activity.test.AppFloatActionButtonActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <!--﻿悬浮在整个app 上的按钮-->
-        <activity android:name=".ui.activity.test.AppFloatActionButtonActivity">
+
+
+        <activity android:name=".ui.activity.my.PictureActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.android.superplayer.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public"/>
+        </provider>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>
