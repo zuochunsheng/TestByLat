@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.autofocus" /> <!-- 华为手机权限 -->
@@ -60,12 +60,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <!-- 权限 背景透明 -->
+        <activity android:name=".ui.activity.hign.CheatActivity" /> <!-- 权限 背景透明 -->
         <activity
             android:name=".permission.ShadowActivity"
-            android:theme="@android:style/Theme.Translucent" />
-        <!-- 拍照 背景透明 -->
+            android:theme="@android:style/Theme.Translucent" /> <!-- 拍照 背景透明 -->
         <activity
             android:name=".takephoto.ShadowActivity"
             android:theme="@android:style/Theme.Translucent" />
@@ -149,23 +147,15 @@
             <!-- </intent-filter> -->
         </activity> <!-- ﻿悬浮在整个app 上的按钮 -->
         <activity android:name=".ui.activity.test.AppFloatActionButtonActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
-
-        <activity android:name=".ui.activity.my.PictureActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
+        <activity android:name=".ui.activity.my.PictureActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -174,12 +164,34 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public"/>
+                android:resource="@xml/file_paths_public" />
         </provider>
+
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ui.activity.hign.SocketActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".ui.activity.hign.SocketStompActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".ui.activity.hign.StompActivity">
+
+        </activity>
     </application>
 
 </manifest>

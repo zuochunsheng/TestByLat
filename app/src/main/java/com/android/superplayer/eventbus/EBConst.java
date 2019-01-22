@@ -15,4 +15,6 @@ public class EBConst {
     public static final int app_destroy = 1000023;//应用销毁
 
 
+    public static final int app_sockct_client = 1000024;//应用 退回到后台
+    public static final int app_socket_server = 1000025;//应用销毁
 }

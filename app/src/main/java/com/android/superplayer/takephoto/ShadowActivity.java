@@ -54,16 +54,16 @@ public class ShadowActivity  extends Activity {
 
     private void handleIntent(Intent intent) {
         int index = intent.getIntExtra("permissions",0);
-        startTakePhotos(index,this);
+        startTakePhotos(index);
     }
 
 
-    private void startTakePhotos(int index,Activity context) {
+    private void startTakePhotos(int index) {
 
         if (index == 0) {//相册
-            selectImg(context);
+            selectImg();
         } else {//拍照
-            camera(context);
+            camera();
         }
 
     }
@@ -71,7 +71,7 @@ public class ShadowActivity  extends Activity {
     /**
      * 拍照
      */
-    private void camera(Activity context) {
+    private void camera() {
         File file = new File(mFilepath, System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -80,7 +80,7 @@ public class ShadowActivity  extends Activity {
         // Android7.0以上URI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //通过FileProvider创建一个content类型的Uri
-            mProviderUri = FileProvider.getUriForFile(context, "com.android.superplayer.fileprovider", file);
+            mProviderUri = FileProvider.getUriForFile(this, "com.android.superplayer.fileprovider", file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mProviderUri);
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -89,18 +89,18 @@ public class ShadowActivity  extends Activity {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
         }
         try {
-            context.startActivityForResult(intent, REQUEST_CAMERA);
+           startActivityForResult(intent, REQUEST_CAMERA);
         } catch (ActivityNotFoundException anf) {
-            Toast.makeText(context, "摄像头未准备好", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "摄像头未准备好", Toast.LENGTH_SHORT).show();
         }
     }
 
     //相册选图
-    private void selectImg(Activity context) {
+    private void selectImg() {
         Intent pickIntent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        context.startActivityForResult(pickIntent, SELECT_FILE);
+        startActivityForResult(pickIntent, SELECT_FILE);
 
     }
 

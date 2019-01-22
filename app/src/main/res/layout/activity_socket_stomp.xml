@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.hign.SocketStompActivity">
+
+    <TextView
+        android:id="@+id/serverMessage"
+        android:gravity="center_vertical"
+        android:text="serverMessage"
+        android:layout_width="200dp"
+        android:layout_height="30dp" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="start"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="stop"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="send 发送数据"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:id="@+id/clientMessage"
+        android:gravity="center_vertical"
+        android:text=""
+        android:layout_width="200dp"
+        android:layout_height="30dp" />
+
+    <Button
+        android:id="@+id/cheat"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="另一个页面1 ---CheatActivity"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/stomp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="另一个页面1 ---StompActivity"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

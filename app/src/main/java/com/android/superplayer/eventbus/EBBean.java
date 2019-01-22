@@ -18,6 +18,9 @@ public class EBBean {
     public EBBean(int index) {
         this.value = index;
     }
+    public EBBean(String stringValue) {
+        this.stringValue = stringValue;
+    }
     public EBBean(int index, String stringValue) {
         this.value = index;
         this.stringValue = stringValue;

@@ -53,6 +53,8 @@ public class AndroidApplication extends Application {
 
         initActivityListener();
 
+
+
     }
 
     /**获取系统上下文：用于ToastUtil类*/
