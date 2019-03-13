@@ -15,6 +15,8 @@ import com.android.superplayer.ui.activity.my.ExoPlayerActivity;
 import com.android.superplayer.ui.activity.my.FFmpegActivity;
 import com.android.superplayer.ui.activity.my.LiveTelecastActivity;
 import com.android.superplayer.ui.activity.my.MediaPlayerActivity;
+import com.android.superplayer.ui.activity.my.TTSActivity;
+import com.android.superplayer.ui.activity.my.TtsDemo;
 import com.android.superplayer.util.ActivityUtil;
 import com.google.android.exoplayer2.ExoPlayer;
 
@@ -45,15 +47,16 @@ public class MeFragment extends BaseFragment {
 
         //获取Activity传递过来的参数
         Bundle mBundle = getArguments();
-        String title = mBundle.getString("arg");
-        LogUtil.e("title = " + title);
+        if (mBundle != null) {
+            String title = mBundle.getString("arg");
+            LogUtil.e("title = " + title);
+        }
+
 
     }
 
 
-
-
-    @OnClick({R.id.tv_goliveTelecast, R.id.tv_goFFmpeg, R.id.tv_exoPlayer, R.id.tv_goMediaPlay})
+    @OnClick({R.id.tv_goliveTelecast, R.id.tv_goFFmpeg, R.id.tv_exoPlayer, R.id.tv_goMediaPlay, R.id.tv_tts,R.id.tv_tts_xunfei})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_goMediaPlay://音乐播放器
@@ -67,6 +70,12 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.tv_exoPlayer: //ExoPlayer
                 ActivityUtil.getInstance().onNext(this.getActivity(), ExoPlayerActivity.class);
+                break;
+            case R.id.tv_tts: //tts
+                ActivityUtil.getInstance().onNext(this.getActivity(), TTSActivity.class);
+                break;
+            case R.id.tv_tts_xunfei: //tts
+                ActivityUtil.getInstance().onNext(this.getActivity(), TtsDemo.class);
                 break;
 
 

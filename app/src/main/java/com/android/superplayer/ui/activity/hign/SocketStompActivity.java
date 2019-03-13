@@ -11,13 +11,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.superplayer.R;
+import com.android.superplayer.config.LogUtil;
+import com.android.superplayer.util.socketutil.Config;
 import com.android.superplayer.util.socketutil.WebscoketUtil;
+import com.android.superplayer.util.socketutil.bean.WebSocketBean;
 
 
+import okhttp3.WebSocket;
 import rx.Subscriber;
 import rx.functions.Action1;
+import ua.naiksoftware.stomp.ConnectionProvider;
+import ua.naiksoftware.stomp.LifecycleEvent;
+import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.client.StompClient;
 import ua.naiksoftware.stomp.client.StompMessage;
+
 /**
  * @time : 2019/1/22 11:31
  * @author : zcs
@@ -86,17 +94,7 @@ public class SocketStompActivity extends Activity {
             }
         });
 
-        // 另一个页面
-        cheat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SocketStompActivity.this,CheatActivity.class));
-                if(mStompClient != null) {
-                    mStompClient.disconnect();
-                }
-                //finish();
-            }
-        });
+
         // 另一个页面
         stomp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,34 +133,40 @@ public class SocketStompActivity extends Activity {
     //创建client 实例
     private void createStompClient() {
 
-//        mStompClient = Stomp.over(WebSocket.class, Config.WS_URI);
-//
-//        //mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/example-endpoint/websocket");
-//        mStompClient.connect();
-//
-//       // Toast.makeText(SocketStompActivity.this,"开始连接 192.168.0.46:8080",Toast.LENGTH_SHORT).show();
-//        mStompClient.lifecycle().subscribe(new Action1<LifecycleEvent>() {
-//            @Override
-//            public void call(LifecycleEvent lifecycleEvent) {
-//                switch (lifecycleEvent.getType()) {
-//                    case OPENED:
-//                        Log.d(TAG, "Stomp connection opened");
-//                        toast("连接已开启");
-//                        break;
-//
-//                    case ERROR:
-//                        Log.e(TAG, "Stomp Error", lifecycleEvent.getException());
-//                        toast("连接出错");
-//                        break;
-//                    case CLOSED:
-//                        Log.d(TAG, "Stomp connection closed");
-//                        toast("连接关闭");
-//                        break;
-//                }
-//            }
-//        });
+        mStompClient = Stomp.over(WebSocket.class, Config.WS_URI);
+
+        //mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, Config.WS_URI);
+        mStompClient.connect();
+
+        mStompClient.lifecycle().subscribe(new Action1<LifecycleEvent>() {
+            @Override
+            public void call(LifecycleEvent lifecycleEvent) {
+                switch (lifecycleEvent.getType()) {
+                    case OPENED:
+                        Log.d(TAG, "Stomp connection opened");
+                        toast("连接已开启");
+                        break;
+
+                    case ERROR:
+                        Log.e(TAG, "Stomp Error", lifecycleEvent.getException());
+                        toast("连接出错");
+                        break;
+                    case CLOSED:
+                        Log.d(TAG, "Stomp connection closed");
+                        toast("连接关闭");
+                        break;
+                }
+            }
+        });
 
         WebscoketUtil.init().createConnect();
+
+        WebscoketUtil.init().registerCallback(new WebscoketUtil.Callback() {
+            @Override
+            public void onGetNewMessage(WebSocketBean socketBean) {
+                LogUtil.e("");
+            }
+        });
 
     }
 

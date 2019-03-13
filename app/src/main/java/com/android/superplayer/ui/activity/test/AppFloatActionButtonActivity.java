@@ -3,6 +3,9 @@ package com.android.superplayer.ui.activity.test;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +39,7 @@ public class AppFloatActionButtonActivity extends BaseActivity implements View.O
 
     @BindView(R.id.skip)
     TextView skip;
+
     @BindView(R.id.vmView)
     VerticalMarqueeView vmView;
     @BindView(R.id.auto_text)
@@ -66,17 +70,9 @@ public class AppFloatActionButtonActivity extends BaseActivity implements View.O
     @Override
     protected void initViewAndData() {
 
-        floatView2 = new FloatView2(this);
-        floatView2.createFloatView();
-        floatView2.onFloatViewClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //这边是点击悬浮按钮的响应事件
-                LogUtil.e("点击悬浮按钮的响应事件");
-            }
-        });
 
-        EventBus.getDefault().register(this);
+
+
 
 
         // 竖直方向 滚动textView
@@ -107,7 +103,40 @@ public class AppFloatActionButtonActivity extends BaseActivity implements View.O
 
         //扇形初始化
         initView();
+
+//        floatView2 = new FloatView2(AppFloatActionButtonActivity.this);
+//        floatView2.createFloatView();
+//        floatView2.onFloatViewClick(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //这边是点击悬浮按钮的响应事件
+//                LogUtil.e("点击悬浮按钮的响应事件");
+//            }
+//        });
+        popupHandler.sendEmptyMessageDelayed(0, 1000*3);
+
+        EventBus.getDefault().register(this);
     }
+
+    private Handler popupHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    floatView2 = new FloatView2(AppFloatActionButtonActivity.this);
+                    floatView2.createFloatView();
+                    floatView2.onFloatViewClick(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //这边是点击悬浮按钮的响应事件
+                            LogUtil.e("点击悬浮按钮的响应事件");
+                        }
+                    });
+                    break;
+            }
+        }
+
+    };
 
     //eventbug接受消息 根据类别区分处理 threadMode = ThreadMode.POSTING
     @Subscribe
@@ -146,6 +175,7 @@ public class AppFloatActionButtonActivity extends BaseActivity implements View.O
 
         auto_text.destroyView();
 
+        EventBus.getDefault().unregister(this);
     }
 
 

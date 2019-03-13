@@ -84,6 +84,12 @@ public class RxJavaActivity extends Activity {
                 subDuck.performQuack();
                 break;
             case R.id.text1:
+
+
+
+
+
+
 //                Observable.just(1, 2, 3, 4)
 //                        .subscribeOn(Schedulers.io())
 //                        .observeOn(AndroidSchedulers.mainThread())
@@ -156,20 +162,20 @@ public class RxJavaActivity extends Activity {
 //                    }
 //                });
 
-                Observable.range(10,2) //  10,  11
-                        .scan(new BiFunction<Integer, Integer, Integer>() { //第一，二个参数传进的参数， 第三个 参数 是返回值
-                            @Override
-                            public Integer apply(Integer integer, Integer integer2) throws Exception {
-                                //第一个值是不参与func2的操作，当然你也可以传递一个init值进入作为默认操作。他的第一个参数是上一次计算的结果传入
-                                LogUtil.e( integer +"==="+integer2);
-                                return integer+integer2;
-                            }
-                        }).subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        LogUtil.e(integer +"----Subacriber");
-                    }
-                });
+//                Observable.range(10,2) //  10,  11
+//                        .scan(new BiFunction<Integer, Integer, Integer>() { //第一，二个参数传进的参数， 第三个 参数 是返回值
+//                            @Override
+//                            public Integer apply(Integer integer, Integer integer2) throws Exception {
+//                                //第一个值是不参与func2的操作，当然你也可以传递一个init值进入作为默认操作。他的第一个参数是上一次计算的结果传入
+//                                LogUtil.e( integer +"==="+integer2);
+//                                return integer+integer2;
+//                            }
+//                        }).subscribe(new Consumer<Integer>() {
+//                    @Override
+//                    public void accept(Integer integer) throws Exception {
+//                        LogUtil.e(integer +"----Subacriber");
+//                    }
+//                });
 
                 break;
             case R.id.text2:

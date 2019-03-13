@@ -9,13 +9,14 @@ import android.widget.EditText;
 import com.android.superplayer.R;
 import com.android.superplayer.util.socketutil.Config;
 
-import org.java_websocket.WebSocket;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.WebSocket;
 import rx.functions.Action1;
 import ua.naiksoftware.stomp.LifecycleEvent;
 import ua.naiksoftware.stomp.Stomp;
