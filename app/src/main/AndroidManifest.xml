@@ -71,7 +71,8 @@
         <!-- 权限 背景透明 -->
         <activity
             android:name=".permission.ShadowActivity"
-            android:theme="@android:style/Theme.Translucent" /> <!-- 拍照 背景透明 -->
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- 拍照 背景透明 -->
         <activity
             android:name=".takephoto.ShadowActivity"
             android:theme="@android:style/Theme.Translucent" />
@@ -90,14 +91,18 @@
         </activity>
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
-        <activity android:name=".ui.activity.my.NoticeListActivity" /> <!-- 音乐播放器 -->
+        <activity android:name=".ui.activity.my.NoticeListActivity" />
+        <!-- 音乐播放器 -->
         <activity android:name=".ui.activity.my.MediaPlayerActivity" />
 
         <service android:name=".service.MusicService" />
 
-        <activity android:name=".ui.activity.my.FFmpegActivity" /> <!-- 直播 -->
-        <activity android:name=".ui.activity.my.LiveTelecastActivity" /> <!-- 视频播放 -->
-        <activity android:name=".ui.activity.my.ExoPlayerActivity" /> <!-- 测试生命周期 -->
+        <activity android:name=".ui.activity.my.FFmpegActivity" />
+        <!-- 直播 -->
+        <activity android:name=".ui.activity.my.LiveTelecastActivity" />
+        <!-- 视频播放 -->
+        <activity android:name=".ui.activity.my.ExoPlayerActivity" />
+        <!-- 测试生命周期 -->
         <activity android:name=".ui.activity.test.StringTestActivity">
 
             <!-- <intent-filter> -->
@@ -107,14 +112,16 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity> <!-- glide -->
-        <activity android:name=".ui.activity.test.BActivity" /> <!-- rx语法 -->
+        <activity android:name=".ui.activity.test.BActivity" />
+        <!-- rx语法 -->
         <activity android:name=".ui.activity.test.RxJavaActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
-        </activity> <!-- 属性动画 -->
+        </activity>
+        <!-- 属性动画 -->
         <activity android:name=".ui.activity.test.AnimatorActivity">
 
             <!-- <intent-filter> -->
@@ -123,7 +130,8 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity> <!-- 动画 -->
+        </activity>
+        <!-- 动画 -->
         <activity android:name=".ui.activity.test.giftActivity">
 
             <!-- <intent-filter> -->
@@ -132,7 +140,8 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity> <!-- 蓝牙 -->
+        </activity>
+        <!-- 蓝牙 -->
         <activity android:name=".ui.activity.test.BluetoothActivity">
 
             <!-- <intent-filter> -->
@@ -141,7 +150,8 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity> <!-- 仿网易云 tab -->
+        </activity>
+        <!-- 仿网易云 tab -->
         <activity android:name=".ui.activity.test.ViewPageIndicatorActivity">
 
             <!-- <intent-filter> -->
@@ -150,7 +160,8 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity> <!-- ﻿悬浮在整个app 上的按钮 -->
+        </activity>
+        <!-- ﻿悬浮在整个app 上的按钮 -->
         <activity
             android:name=".ui.activity.test.AppFloatActionButtonActivity"
             android:screenOrientation="portrait">
@@ -186,7 +197,8 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity> <!-- socket -->
+        </activity>
+        <!-- socket -->
         <activity android:name=".ui.activity.hign.SocketStompActivity">
 
             <!-- <intent-filter> -->
