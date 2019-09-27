@@ -63,6 +63,8 @@ public class ExoPlayerActivity extends BaseActivity {
     Uri playerUri = Uri.parse("https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4");
    // Uri playerUri = Uri.parse("http://192.168.1.143/musicMenu/audio_1rlNNLnaZTKHzUWGqePA.m4a");
 
+    //Uri playerUri = Uri.parse("rtmp://192.168.1.49/oflaDemo/test.mp4");
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_exo_player;

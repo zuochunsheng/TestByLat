@@ -30,6 +30,7 @@ public class StringTestActivity extends Activity {
         setContentView(R.layout.activity_string_test);
 
 
+
         TextView textView1 = (TextView) findViewById(R.id.textView);
         //textView.setText("text----1");
 
