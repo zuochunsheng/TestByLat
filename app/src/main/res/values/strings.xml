@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Superplayer</string>
+    <string name="app_name">TestByLat</string>
     <!-- 请替换成在语音云官网申请的appid -->
     <string name="app_id">5c887cfd</string>
 
@@ -37,7 +37,7 @@
 
 
     <!--<string name="text_tts_source">科大讯飞作为中国最大的智能语音技术提供商，在智能语音技术领域有着长期的研究积累，并在中文语音合成、语音识别、-->
-        <!--口语评测等多项技术上拥有国际领先的成果。科大讯飞是我国唯一以语音技术为产业化方向的“国家863计划成果产业化基地”&#8230;</string>-->
+    <!--口语评测等多项技术上拥有国际领先的成果。科大讯飞是我国唯一以语音技术为产业化方向的“国家863计划成果产业化基地”&#8230;</string>-->
 
     <string name="text_tts_source">金額は8桁の数字にはできない 取引処理については、請求書の詳細について確認してください</string>
 
@@ -143,5 +143,21 @@
     <string name="pref_key_translate">translate</string>
     <string name="pref_title_translate">翻译</string>
 
+    <string name="alivc_longvideo_toast_add_download">已添加至缓存列表</string>
+    <string name="alivc_longvideo_cache_toast_4g">连接wifi，或允许运营商下载</string>
+    <string name="alivc_longvideo_doawload_operator">运营商网络下载</string>
+    <string name="alivc_longvideo_player_loacl_cache_toast">本地视频无法缓存</string>
+    <string name="alivc_longvideo_player_vip_cache_toast">非会员无法缓存VIP视频</string>
+    <string name="alivc_longvideo_series_all_number_list">全%d集</string>
 
+    <string name="alivc_longvideo_more_content">更多</string>
+    <string name="alivc_longvideo_play_consult">当前视频</string>
+    <string name="alivc_longvideo_play_similar_videolist">猜你喜欢</string>
+
+    <string name="alivc_longvideo_quality_sd">LD</string>
+    <string name="alivc_longvideo_quality_hd">SD</string>
+    <string name="alivc_longvideo_quality_ssd">HD</string>
+    <string name="alivc_longvideo_quality_chinese_sd">标清</string>
+    <string name="alivc_longvideo_quality_chinese_hd">高清</string>
+    <string name="alivc_longvideo_quality_chinese_ssd">超清</string>
 </resources>

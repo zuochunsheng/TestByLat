@@ -10,13 +10,13 @@ import android.widget.TextView;
 import com.android.superplayer.R;
 import com.android.superplayer.config.LogUtil;
 import com.android.superplayer.ui.widgit.FutureStudioView;
-import com.android.superplayer.util.GlideSimpleTarget;
+//import com.android.superplayer.util.GlideSimpleTarget;
 import com.android.superplayer.util.duckdesign.OtherObiect;
 import com.android.superplayer.util.duckdesign.SubDuck;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.ViewTarget;
+//import com.bumptech.glide.Glide;
+//import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+//import com.bumptech.glide.request.animation.GlideAnimation;
+//import com.bumptech.glide.request.target.ViewTarget;
 
 
 import java.util.concurrent.Callable;
@@ -275,16 +275,16 @@ public class RxJavaActivity extends Activity {
 
                 FutureStudioView customView = (FutureStudioView) findViewById( R.id.text4 );
 
-                ViewTarget viewTarget = new ViewTarget<FutureStudioView, GlideDrawable>( customView ) {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        this.view.setImage( resource.getCurrent() );
-                    }
-                };
+//                ViewTarget viewTarget = new ViewTarget<FutureStudioView, GlideDrawable>( customView ) {
+//                    @Override
+//                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+//                        this.view.setImage( resource.getCurrent() );
+//                    }
+//                };
 
-                Glide.with( this.getApplicationContext() ) // safer!
-                        .load( sss)
-                        .into( viewTarget );
+//                Glide.with( this.getApplicationContext() ) // safer!
+//                        .load( sss)
+//                        .into( viewTarget );
 
                 break;
             case R.id.text5:

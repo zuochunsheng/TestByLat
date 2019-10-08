@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.android.superplayer">
+
     <!-- 直播的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -32,6 +33,7 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
@@ -49,11 +51,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.AndroidApplication"
@@ -65,8 +64,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--tts-->
-        <activity android:name=".ui.activity.my.TTSActivity"></activity>
+        <!-- tts -->
+        <activity android:name=".ui.activity.my.TTSActivity" />
         <!-- 权限 背景透明 -->
         <activity
             android:name=".permission.ShadowActivity"
@@ -81,10 +80,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base">
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
@@ -98,11 +97,14 @@
         <!-- 直播 -->
         <activity android:name=".ui.activity.my.LiveTelecastActivity" />
         <!-- 视频播放 -->
-        <activity android:name=".ui.activity.my.ExoPlayerActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".ui.activity.my.ExoPlayerActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <!-- 测试生命周期 -->
         <activity android:name=".ui.activity.test.StringTestActivity">
@@ -117,11 +119,13 @@
         <activity android:name=".ui.activity.test.BActivity" />
         <!-- rx语法 -->
         <activity android:name=".ui.activity.test.RxJavaActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <!-- 属性动画 -->
         <activity android:name=".ui.activity.test.AnimatorActivity">
@@ -169,21 +173,21 @@
             android:name=".ui.activity.test.AppFloatActionButtonActivity"
             android:screenOrientation="portrait">
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.activity.my.PictureActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.android.superplayer.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public" />
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <activity
@@ -211,6 +215,22 @@
         </activity>
         <activity android:name=".ui.activity.hign.StompActivity" />
         <activity android:name=".ui.activity.my.TtsDemo" />
+        <activity
+            android:name=".ui.activity.media.AlivcPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"></activity>
+
+        <service
+            android:name="com.aliyun.player.alivcplayerexpand.view.dlna.service.ClingUpnpService"
+            android:exported="false" />
+
+        <activity android:name=".ui.activity.media.MainMediaActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

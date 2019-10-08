@@ -83,7 +83,8 @@ android {
         implementation 'com.google.android.exoplayer:exoplayer:2.6.0'
         //直播  无用
         //implementation 'com.laifeng:sopcast-sdk:1.0.4'
-        implementation 'com.github.bumptech.glide:glide:3.7.0'
+        implementation 'com.github.bumptech.glide:glide:4.8.0'//3.7.0  4.8.0
+
         // glide 转换库
         implementation 'jp.wasabeef:glide-transformations:2.0.1'
         //implementation 'jp.wasabeef:glide-transformations:3.0.1'
@@ -115,12 +116,22 @@ android {
         //StompProtocolAndroid 依赖于webSocket的标准实现
         implementation 'org.java-websocket:Java-WebSocket:1.3.0'
 
-        //implementation 'com.google.code.gson:gson:2.8.2'
+        implementation 'com.google.code.gson:gson:2.8.0'//2.8.2
         //implementation 'com.github.arvinljw:SocialHelper:v1.2.0'
         implementation files('libs/Msc.jar')
+
+        implementation project(':AliyunVideoCommon')
+        implementation project(':Aliyunplayer:AlivcPlayerTools')
+        implementation 'com.aliyun.sdk.android:AliyunPlayer:4.7.0-part'
+        implementation externalAlivcFFmpeg
+
+        implementation externalAliyunOSS
+        implementation externalAlivcConan
+        implementation externalAlivcCore
     }
 }
 
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 }

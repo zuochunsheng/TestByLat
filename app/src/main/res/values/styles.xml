@@ -46,4 +46,11 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="clickEffect" parent="Widget.AppCompat.ActionButton">
+    </style>
+    <style name="clickEffect_trans" parent="Widget.AppCompat.ActionButton">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
 </resources>

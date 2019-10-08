@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.aliyun.svideo.common.utils.FileUtils;
 import com.android.superplayer.R;
 import com.yalantis.ucrop.UCrop;
 import com.yanzhenjie.permission.FileProvider;
@@ -80,7 +81,7 @@ public class ShadowActivity  extends Activity {
         // Android7.0以上URI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //通过FileProvider创建一个content类型的Uri
-            mProviderUri = FileProvider.getUriForFile(this, "com.android.superplayer.fileprovider", file);
+            mProviderUri = FileProvider.getUriForFile(this, FileUtils.getFileProviderName(this), file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mProviderUri);
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

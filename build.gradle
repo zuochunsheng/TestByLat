@@ -1,13 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
+    apply from: 'thirdparty-lib/config.gradle'
     repositories {
         maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         maven { url "https://stomp.github.io" }
         google()
         jcenter()
+
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+        maven { url 'http://4thline.org/m2' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0-alpha05'
@@ -27,7 +31,11 @@ allprojects {
         jcenter()
 
         mavenCentral()
-        //maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+        //maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'http://4thline.org/m2' }
+        //flatDir { dirs 'src/main/libs' }
     }
 }
 
