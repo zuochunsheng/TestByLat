@@ -154,8 +154,9 @@ public class ExoPlayerActivity extends BaseActivity {
 
     //监听播放器的状态:
     private ExoPlayer.EventListener eventListener = new ExoPlayer.EventListener() {
+
         @Override
-        public void onTimelineChanged(Timeline timeline, Object manifest) {
+        public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
             LogUtil.e("onTimelineChanged");
         }
 

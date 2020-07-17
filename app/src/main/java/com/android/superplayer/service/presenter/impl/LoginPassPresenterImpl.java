@@ -13,8 +13,8 @@ import com.android.superplayer.service.view.impl.ILoginPassView;
 import com.android.superplayer.util.request.BaseRetrofit;
 
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
+//import org.reactivestreams.Subscriber;
+//import org.reactivestreams.Subscription;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -59,39 +59,39 @@ public class LoginPassPresenterImpl implements ILoginPassPresenter {
 
 
 
-        BaseRetrofit.getInstance()
-                .post(ApplicationInterface.URL_USERS_LOGIN,requestBody, LoginBean.class)
-                .subscribe(new Subscriber<LoginBean>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-
-                    }
-
-                    @Override
-                    public void onNext(LoginBean loginBean) {
-                        //网络请求成功 有返回 不管对错
-                        LogUtil.e("next bannerList mCompositeSubscription");
-
-                        try {
-                            //String s = responseBody.string();//不能用 toString() ;
-
-                            LogUtil.e(loginBean);// 值为null 的不会打印出来
-                            activity.loginPassResultInfo(loginBean);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        LogUtil.e("网络请求失败：" + t.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        BaseRetrofit.getInstance()
+//                .post(ApplicationInterface.URL_USERS_LOGIN,requestBody, LoginBean.class)
+//                .subscribe(new Subscriber<LoginBean>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(LoginBean loginBean) {
+//                        //网络请求成功 有返回 不管对错
+//                        LogUtil.e("next bannerList mCompositeSubscription");
+//
+//                        try {
+//                            //String s = responseBody.string();//不能用 toString() ;
+//
+//                            LogUtil.e(loginBean);// 值为null 的不会打印出来
+//                            activity.loginPassResultInfo(loginBean);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        LogUtil.e("网络请求失败：" + t.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
 
 //        BaseService.getBaseService()

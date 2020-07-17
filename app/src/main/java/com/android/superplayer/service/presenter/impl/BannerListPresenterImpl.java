@@ -11,14 +11,16 @@ import com.android.superplayer.service.presenter.IBannerListPresenter;
 import com.android.superplayer.service.view.impl.IBannerListView;
 import com.android.superplayer.util.request.BaseRetrofit;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
+//import org.reactivestreams.Subscriber;
+//import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
+import rx.Subscriber;
+import rx.Subscription;
 
 /**
  * anther: created by zuochunsheng on 2018/9/3 09 : 54
@@ -39,39 +41,39 @@ public class BannerListPresenterImpl extends BasePresenter implements IBannerLis
     @Override
     public void getBannerList(Context context, HashMap<String, String> requestBody) {
 
-        BaseRetrofit.getInstance()
-                .post(ApplicationInterface.URL_BANNERS_LIST,requestBody, BannerListBean.class)
-                .subscribe(new Subscriber<BannerListBean>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-
-                    }
-
-                    @Override
-                    public void onNext(BannerListBean bannerListBean) {
-                        //网络请求成功 有返回 不管对错
-                        LogUtil.e("next bannerList mCompositeSubscription");
-
-                        try {
-                            //String s = responseBody.string();//不能用 toString() ;
-
-                            LogUtil.e(bannerListBean);// 值为null 的不会打印出来
-                            activity.bannerListInfo(bannerListBean);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        LogUtil.e("网络请求失败：" + t.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        BaseRetrofit.getInstance()
+//                .post(ApplicationInterface.URL_BANNERS_LIST,requestBody, BannerListBean.class)
+//                .subscribe(new Subscriber<BannerListBean>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(BannerListBean bannerListBean) {
+//                        //网络请求成功 有返回 不管对错
+//                        LogUtil.e("next bannerList mCompositeSubscription");
+//
+//                        try {
+//                            //String s = responseBody.string();//不能用 toString() ;
+//
+//                            LogUtil.e(bannerListBean);// 值为null 的不会打印出来
+//                            activity.bannerListInfo(bannerListBean);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        LogUtil.e("网络请求失败：" + t.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
 //        super.mCompositeSubscription.add(DataManager.getInstance(context)
 //

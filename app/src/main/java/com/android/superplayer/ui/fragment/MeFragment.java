@@ -18,7 +18,7 @@ import com.android.superplayer.ui.activity.my.MediaPlayerActivity;
 import com.android.superplayer.ui.activity.my.TTSActivity;
 import com.android.superplayer.ui.activity.my.TtsDemo;
 import com.android.superplayer.util.ActivityUtil;
-import com.google.android.exoplayer2.ExoPlayer;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -18,8 +18,8 @@ import com.android.superplayer.util.request.ParamRequest;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
+//import org.reactivestreams.Subscriber;
+//import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 
@@ -63,35 +63,35 @@ public class InvestmentFragment extends BaseFragment {
 //                name (string, optional): 搜索名称 ,
 //                status (integer, optional): 状态， 0 全部；1 进行中， 2 一结束 ,
 
-        BaseRetrofit.getInstance()
-                .post(ApplicationInterface.URL_PRODUCT_LIST,requestDefaultHash,ResponseBody.class)
-                .subscribe(new Subscriber<ResponseBody>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
-                        LogUtil.e("next 产品列表");
-                        try {
-                            LogUtil.e(responseBody.string());
-                            //dealWelfareSuccess(discoverBean);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        LogUtil.e("失败");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        LogUtil.e("成功");
-                    }
-                });
+//        BaseRetrofit.getInstance()
+//                .post(ApplicationInterface.URL_PRODUCT_LIST,requestDefaultHash,ResponseBody.class)
+//                .subscribe(new Subscriber<ResponseBody>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(ResponseBody responseBody) {
+//                        LogUtil.e("next 产品列表");
+//                        try {
+//                            LogUtil.e(responseBody.string());
+//                            //dealWelfareSuccess(discoverBean);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        LogUtil.e("失败");
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        LogUtil.e("成功");
+//                    }
+//                });
 
 //        BaseService.getBaseService()
 //                .getProductList(requestDefaultHash)

@@ -14,8 +14,8 @@ import com.android.superplayer.util.request.BaseRetrofit;
 import com.android.superplayer.util.response.ExceptionSubscriber;
 import com.android.superplayer.util.response.SimpleCallback;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
+//import org.reactivestreams.Subscriber;
+//import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 
@@ -106,37 +106,37 @@ public class RegPassPresenterImpl extends BasePresenter implements IRegPassPrese
 
 
 
-        BaseRetrofit.getInstance()
-                .post(ApplicationInterface.URL_USERS_REG,requestBody, LoginWBean.class)
-                .subscribe(new Subscriber<LoginWBean>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-
-                    }
-
-                    @Override
-                    public void onNext(LoginWBean loginBean) {
-                        //网络请求成功 有返回 不管对错
-                        LogUtil.e("next bannerList mCompositeSubscription");
-
-                        LogUtil.e("onNext reg 返回解刨200 之后的数据");
-                        LogUtil.e(loginBean);
-                        loginNWBean = loginBean;
-
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        LogUtil.e("网络请求失败：" + t.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        if (loginNWBean != null) {
-                            activity.regPassResultInfo(loginNWBean);
-                        }
-                    }
-                });
+//        BaseRetrofit.getInstance()
+//                .post(ApplicationInterface.URL_USERS_REG,requestBody, LoginWBean.class)
+//                .subscribe(new Subscriber<LoginWBean>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(LoginWBean loginBean) {
+//                        //网络请求成功 有返回 不管对错
+//                        LogUtil.e("next bannerList mCompositeSubscription");
+//
+//                        LogUtil.e("onNext reg 返回解刨200 之后的数据");
+//                        LogUtil.e(loginBean);
+//                        loginNWBean = loginBean;
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        LogUtil.e("网络请求失败：" + t.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        if (loginNWBean != null) {
+//                            activity.regPassResultInfo(loginNWBean);
+//                        }
+//                    }
+//                });
 
 
 

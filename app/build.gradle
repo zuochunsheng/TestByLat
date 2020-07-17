@@ -79,8 +79,7 @@ android {
         //compile 'com.jude:rollviewpager:1.2.9'
         implementation 'com.jcodecraeer:xrecyclerview:1.2.7'
         implementation 'com.bigkoo:convenientbanner:2.0.5'
-        //完整库
-        implementation 'com.google.android.exoplayer:exoplayer:2.6.0'
+
         //直播  无用
         //implementation 'com.laifeng:sopcast-sdk:1.0.4'
         implementation 'com.github.bumptech.glide:glide:4.8.0'//3.7.0  4.8.0
@@ -128,6 +127,20 @@ android {
         implementation externalAliyunOSS
         implementation externalAlivcConan
         implementation externalAlivcCore
+
+
+        /* Retrofit */
+        //api 'com.squareup.retrofit2:retrofit:2.5.0'
+       // api 'com.squareup.retrofit2:converter-gson:2.5.0'
+       // api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+       // api "com.squareup.retrofit2:converter-scalars:2.5.0"
+        api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+        /* RxJava or RxAndroid */
+        api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+        api 'io.reactivex.rxjava2:rxjava:2.2.9'
+
+        //完整库
+        implementation 'com.google.android.exoplayer:exoplayer:2.8.1'
     }
 }
 

@@ -533,13 +533,19 @@ public class AlivcPlayerActivity extends AppCompatActivity implements AliyunDown
         mAliyunVodPlayerView.setOnDotViewClickListener(new PlayerDotViewClickListener(this));
 
         mAliyunVodPlayerView.setOnControlViewHideListener(new PlayerControlViewHideListener(this));
+        //屏幕切换
         mAliyunVodPlayerView.setOrientationChangeListener(new PlayerOrientationChangeListner(this));
         mAliyunVodPlayerView.setOnTrailerViewClickListener(new PlayerTrailerViewClickListener(this));
         mAliyunVodPlayerView.setOnScreenBrightness(new PlayerControlViewScreenBrightnessListener(this));
+        //ControlView 横屏展示更多
         mAliyunVodPlayerView.setOnShowMoreClickListener(new PlayerControlViewShowMoreClickListener(this));
+        //投屏状态下的单击事件
         mAliyunVodPlayerView.setOnScreenCostingSingleTagListener(new MyOnScreenCostingSingleTagListener(this));
+        //广告点击事件 退出页面
         mAliyunVodPlayerView.setOnFinishListener(new PlayerControlViewFinishListener(this));
+        //发送弹幕
         mAliyunVodPlayerView.setSoftKeyHideListener(new MynewOnSoftKeyHideListener(this));
+        //投屏时,视频播放完成回调
         mAliyunVodPlayerView.setOnScreenCostingVideoCompletionListener(new OnScreenCostingVideoCompletionListener(this));
 
         mAliyunVodPlayerView.setScreenBrightness(BrightnessDialog.getActivityBrightness(AlivcPlayerActivity.this));
