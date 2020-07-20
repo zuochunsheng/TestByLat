@@ -79,11 +79,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.activity.my.LoginActivity" />
         <activity android:name=".ui.activity.WebActivity" />
@@ -96,18 +91,8 @@
         <activity android:name=".ui.activity.my.FFmpegActivity" />
         <!-- 直播 -->
         <activity android:name=".ui.activity.my.LiveTelecastActivity" />
-        <!-- 视频播放 -->
-<!--        <activity android:name=".ui.activity.my.ExoPlayerActivity">-->
-
-<!--            &lt;!&ndash; <intent-filter> &ndash;&gt;-->
-<!--            &lt;!&ndash; <action android:name="android.intent.action.MAIN" /> &ndash;&gt;-->
-
-
-<!--            &lt;!&ndash; <category android:name="android.intent.category.LAUNCHER" /> &ndash;&gt;-->
-<!--            &lt;!&ndash; </intent-filter> &ndash;&gt;-->
-<!--        </activity>-->
-        <!-- 测试生命周期 -->
-        <activity android:name=".ui.activity.test.StringTestActivity">
+<!--         视频播放-->
+        <activity android:name=".ui.activity.my.ExoPlayerActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -115,68 +100,36 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
+        </activity>
+        <!-- 测试生命周期 -->
+        <activity android:name=".ui.activity.test.StringTestActivity">
         </activity> <!-- glide -->
         <activity android:name=".ui.activity.test.BActivity" />
         <!-- rx语法 -->
         <activity android:name=".ui.activity.test.RxJavaActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <!-- 属性动画 -->
         <activity android:name=".ui.activity.test.AnimatorActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <!-- 动画 -->
         <activity android:name=".ui.activity.test.giftActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <!-- 蓝牙 -->
         <activity android:name=".ui.activity.test.BluetoothActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <!-- 仿网易云 tab -->
         <activity android:name=".ui.activity.test.ViewPageIndicatorActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <!-- ﻿悬浮在整个app 上的按钮 -->
         <!-- ﻿上下滚动的TextView -->
         <activity
             android:name=".ui.activity.test.AppFloatActionButtonActivity"
             android:screenOrientation="portrait">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.activity.my.PictureActivity" />
 
@@ -195,23 +148,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ui.activity.hign.SocketActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <!-- socket -->
         <activity android:name=".ui.activity.hign.SocketStompActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.activity.hign.StompActivity" />
         <activity android:name=".ui.activity.my.TtsDemo" />
@@ -226,10 +165,6 @@
             android:exported="false" />
 
         <activity android:name=".ui.activity.media.MainMediaActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

@@ -58,12 +58,14 @@ public class ExoPlayerActivity extends BaseActivity {
     private ProgressBar mProgressBar;
     private Context context = this;
 
+    // not
+    String origin = "https://mparticle.uc.cn/video.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_aid=2ef327d6a964424396ee6460e73ec563!!wm_id=41ad6b83918746c2ad1a4afbab13e1cd";
+    String url = "https://iflow.uc.cn/ucnews/video?app=ucnewsvideo-iflow&aid=6826425571346778896&cid=10016&zzd_from=ucnewsvideo-iflow&uc_param_str=dndsfrvesvntnwpfgibi&recoid=8956383277257216137&rd_type=reco&original_url=http%3A%2F%2Fv.ums.uc.cn%2Fvideo%2Fv_c6a5448cb6e34b64.html&uc_biz_str=S%3Acustom%7CC%3Aiflow_video_hide&ums_id=c6a5448cb6e34b64&activity=1&activity2=1";
 
+    String mp4_url = "https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4";
     // 视频网络地址
-    Uri playerUri = Uri.parse("https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4");
-   // Uri playerUri = Uri.parse("http://192.168.1.143/musicMenu/audio_1rlNNLnaZTKHzUWGqePA.m4a");
-
-    //Uri playerUri = Uri.parse("rtmp://192.168.1.49/oflaDemo/test.mp4");
+    //Uri playerUri = Uri.parse(origin);
+    Uri playerUri = Uri.parse(mp4_url);
 
     @Override
     protected int getLayoutId() {
@@ -109,8 +111,7 @@ public class ExoPlayerActivity extends BaseActivity {
         //测量播放过程中的带宽。 如果不需要,可以为null。
         DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         // 生成加载媒体数据的DataSource实例。
-        DataSource.Factory dataSourceFactory
-                = new DefaultDataSourceFactory(ExoPlayerActivity.this,
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(ExoPlayerActivity.this,
                 Util.getUserAgent(ExoPlayerActivity.this, "useExoplayer"), bandwidthMeter);
         // 生成用于解析媒体数据的Extractor实例。
         ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
