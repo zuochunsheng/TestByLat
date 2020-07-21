@@ -15,12 +15,18 @@
         android:text="MediaPlayerDemo音乐播放器" />
 
     <TextView
+        android:id="@+id/tv_third"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:text="AlivcPlayerActivity 播放器" />
+
+    <TextView
         android:id="@+id/tv_exoPlayer"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:gravity="center_vertical"
         android:text="tv_exoPlayer播放器" />
-
     <TextView
         android:id="@+id/tv_goliveTelecast"
         android:layout_width="match_parent"

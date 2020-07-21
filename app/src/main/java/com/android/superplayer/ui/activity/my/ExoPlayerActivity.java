@@ -65,7 +65,7 @@ public class ExoPlayerActivity extends BaseActivity {
     String mp4_url = "https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4";
     // 视频网络地址
     //Uri playerUri = Uri.parse(origin);
-    Uri playerUri = Uri.parse(mp4_url);
+    Uri playerUri = Uri.parse(origin);
 
     @Override
     protected int getLayoutId() {

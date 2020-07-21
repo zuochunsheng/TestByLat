@@ -119,6 +119,7 @@ android {
         //implementation 'com.github.arvinljw:SocialHelper:v1.2.0'
         implementation files('libs/Msc.jar')
 
+
         implementation project(':AliyunVideoCommon')
         implementation project(':Aliyunplayer:AlivcPlayerTools')
         implementation 'com.aliyun.sdk.android:AliyunPlayer:4.7.0-part'
@@ -141,6 +142,7 @@ android {
 
         //完整库
         implementation 'com.google.android.exoplayer:exoplayer:2.8.1'
+        //implementation project(':zqvideolibrary')
     }
 }
 
