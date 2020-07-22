@@ -1,9 +1,11 @@
-package com.android.superplayer.ui.activity;
+package com.android.superplayer.ui.activity.my;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import com.android.superplayer.R;
 import com.android.superplayer.base.BaseActivity;
+import com.android.superplayer.config.LogUtil;
 import com.tencent.smtt.export.external.interfaces.ConsoleMessage;
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
 import com.tencent.smtt.export.external.interfaces.JsPromptResult;
@@ -31,7 +34,8 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
-public  abstract  class BaseTencenWebactivity extends BaseActivity {
+//BaseActivity
+public class BaseTencenWebactivity extends FragmentActivity {
     protected RelativeLayout rlToolbar;
     protected ImageButton ibLeft1;
     protected ImageButton ibRight2;
@@ -43,15 +47,22 @@ public  abstract  class BaseTencenWebactivity extends BaseActivity {
 
     public static final String FROM_WHERE = "H5";   //跳转来源H5;
 
-
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_base_tencen_web;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base_tencen_web);
+        initViewAndData();
     }
 
+//    @Override
+//    protected int getLayoutId() {
+//        return R.layout.activity_base_tencen_web;
+//    }
 
-    @Override
+
+    //@Override
     protected void initViewAndData() {
+        LogUtil.e("class BaseTenceWeb");
         rlToolbar = (RelativeLayout) findViewById(R.id.rl_toolbar);
         ibLeft1 = (ImageButton) findViewById(R.id.ibLeft);
         ibRight2 = (ImageButton) findViewById(R.id.ibRight);
@@ -61,6 +72,7 @@ public  abstract  class BaseTencenWebactivity extends BaseActivity {
         progressBar.setProgress(0);
 
         webView = (WebView) findViewById(R.id.webView);
+
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
@@ -72,6 +84,7 @@ public  abstract  class BaseTencenWebactivity extends BaseActivity {
         webView.getSettings().setGeolocationEnabled(true);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setUserAgentString("Mozilla/5.0 (Linux; U; Android 5.1.1; zh-cn;) AppleWebKit/537.36 (KHTML, like Gecko)Version/4.0 Chrome/37.0.0.0 MQQBrowser/6.3 Mobile Safari/537.36");
+
         onWebViewSettingBuild();
         configPlaySetting();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
@@ -188,6 +201,8 @@ public  abstract  class BaseTencenWebactivity extends BaseActivity {
         String url = getUrl();
         if (!TextUtils.isEmpty(url)) {
             loadUrl(url);
+            String url4 = ExoPlayerActivity.mp4;
+            playVideoByTbs(url4);
         }
 
     }
@@ -197,37 +212,31 @@ public  abstract  class BaseTencenWebactivity extends BaseActivity {
      */
     protected void configPlaySetting(){
         Bundle data = new Bundle();
-//true表示标准全屏，false表示X5全屏；不设置默认false，
+        //true表示标准全屏，false表示X5全屏；不设置默认false，
         data.putBoolean("standardFullScreen", false);
-//false：关闭小窗；true：开启小窗；不设置默认true，
+       //false：关闭小窗；true：开启小窗；不设置默认true，
         data.putBoolean("supportLiteWnd", true);
-//1：以页面内开始播放，2：以全屏开始播放；不设置默认：1
+        //1：以页面内开始播放，2：以全屏开始播放；不设置默认：1
         data.putInt("DefaultVideoScreen", 1);
-        webView.getX5WebViewExtension().invokeMiscMethod("setVideoParams", data);
+
+        if(webView != null && webView.getX5WebViewExtension()!=null){
+            webView.getX5WebViewExtension().invokeMiscMethod("setVideoParams", data);
+        }
+
 //        standardFullScreen 全屏设置
 //
 //        设置为true时，我们会回调WebChromeClient的onShowCustomView方法，由开发者自己实现全屏展示；
-//
 //        设置为false时，由我们实现全屏展示，我们实现全屏展示需要满足下面两个条件：
-//
 //        a. 我们 Webview初始化的Context必须是Activity类型的Context
-//
 //        b. 我们 Webview 所在的Activity要声明这个属性
-//
 //        android:configChanges="orientation|screenSize|keyboardHidden"
 //        如果不满足这两个条件，standardFullScreen 自动置为 true
 //        supportLiteWnd 小窗播放设置
-//
 //        前提standardFullScreen=false，这个条件才生效
-//
 //        设置为 true， 开启小窗功能
-//
 //        设置为 false，不使用小窗功能
-//
 //        DefaultVideoScreen 初始播放形态设置
-//
 //        a、以页面内形态开始播放
-//
 //        b、以全屏形态开始播放
 
     }
@@ -311,7 +320,7 @@ public  abstract  class BaseTencenWebactivity extends BaseActivity {
     }
 
     protected boolean enabledHTTPS() {
-       // return Tools.getBooleanExtra(getIntent(), "enabledHTTPS", false);
+        //return Tools.getBooleanExtra(getIntent(), "enabledHTTPS", false);
         return true;
     }
 
@@ -365,12 +374,8 @@ public  abstract  class BaseTencenWebactivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (webView.canGoBack()) {
-                webView.goBack();
-            } else {
-                back();
-            }
+        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+            webView.goBack();
             return true;
         }
         return super.onKeyDown(keyCode, event);

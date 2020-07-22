@@ -20,7 +20,7 @@ import com.android.superplayer.pulltorefresh.RefreshLayout;
 import com.android.superplayer.service.entity.BannerListBean;
 import com.android.superplayer.service.presenter.impl.BannerListPresenterImpl;
 import com.android.superplayer.service.view.impl.IBannerListView;
-import com.android.superplayer.ui.activity.WebActivity;
+import com.android.superplayer.ui.activity.my.WebActivity;
 import com.android.superplayer.ui.activity.my.LoginActivity;
 import com.android.superplayer.ui.activity.my.NoticeListActivity;
 import com.android.superplayer.ui.widgit.MyScrollView;

@@ -171,7 +171,12 @@
             android:hardwareAccelerated="true"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 
-        <activity android:name=".ui.activity.WebActivity" />
+        <activity android:name=".ui.activity.my.WebActivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".ui.activity.my.BaseTencenWebactivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

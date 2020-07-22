@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.WebActivity">
+    android:orientation="vertical"
+    tools:context=".ui.activity.my.WebActivity">
 
     <RelativeLayout
         android:id="@+id/rl_toolbar"
@@ -21,12 +22,12 @@
             android:contentDescription="@string/app_name"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:src="@drawable/rose" />
+            android:src="@drawable/setting" />
 
         <!--        style="@style/titletext"-->
         <TextView
             android:id="@+id/tvTitle"
-
+            android:text="text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -34,14 +35,16 @@
             android:layout_marginRight="40dp"
             android:ellipsize="end" />
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/ibRight"
+            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
 
-            android:background="@drawable/bg_corner_white"
+            android:background="@drawable/rose"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:visibility="gone" />
+             />
     </RelativeLayout>
 
     <!--    android:progressDrawable="@drawable/mt_progress_horizontal"-->
@@ -58,4 +61,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -267,7 +267,7 @@ public class WebVideoActivity extends BaseActivity {
 //        }
 //        return true;
 
-        if ((keyCode == KEYCODE_BACK) && mWebView.canGoBack()) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
             mWebView.goBack();
             return true;
         }

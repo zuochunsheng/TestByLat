@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.android.superplayer.R;
 import com.android.superplayer.base.BaseFragment;
 import com.android.superplayer.config.LogUtil;
-import com.android.superplayer.ui.activity.WebActivity;
-import com.android.superplayer.ui.activity.media.AlivcPlayerActivity;
+import com.android.superplayer.ui.activity.my.BaseTencenWebactivity;
+import com.android.superplayer.ui.activity.my.WebActivity;
 import com.android.superplayer.ui.activity.media.MainMediaActivity;
 import com.android.superplayer.ui.activity.my.ExoPlayerActivity;
 import com.android.superplayer.ui.activity.my.FFmpegActivity;
@@ -20,14 +20,11 @@ import com.android.superplayer.ui.activity.my.LiveTelecastActivity;
 import com.android.superplayer.ui.activity.my.MediaPlayerActivity;
 import com.android.superplayer.ui.activity.my.TTSActivity;
 import com.android.superplayer.ui.activity.my.TtsDemo;
-import com.android.superplayer.ui.activity.my.WebVideoActivity;
 import com.android.superplayer.util.ActivityUtil;
 
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class MeFragment extends BaseFragment {
 
@@ -81,8 +78,10 @@ public class MeFragment extends BaseFragment {
                 ActivityUtil.getInstance().onNext(this.getActivity(), MainMediaActivity.class);
                 break;
            case R.id.webVideo:
+               String url = ExoPlayerActivity.url;//ok
                // ActivityUtil.getInstance().onNext(this.getActivity(), WebVideoActivity.class);
                 ActivityUtil.getInstance().onNext(this.getActivity(), WebActivity.class);
+                //ActivityUtil.getInstance().onNext(this.getActivity(), BaseTencenWebactivity.class,"url",url);
                 break;
             case R.id.tv_tts: //tts
                 ActivityUtil.getInstance().onNext(this.getActivity(), TTSActivity.class);
