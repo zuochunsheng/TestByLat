@@ -56,6 +56,9 @@
     <uses-feature android:name="android.hardware.nfc.hce" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
 
+    <!--    硬件加速-->
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
     <application
         android:name=".application.AndroidApplication"
         android:allowBackup="true"
@@ -83,7 +86,7 @@
             android:theme="@style/AppTheme.Base">
         </activity>
         <activity android:name=".ui.activity.my.LoginActivity" />
-        <activity android:name=".ui.activity.WebActivity" />
+
         <activity android:name=".ui.activity.my.NoticeListActivity" />
         <!-- 音乐播放器 -->
         <activity android:name=".ui.activity.my.MediaPlayerActivity" />
@@ -168,6 +171,7 @@
             android:hardwareAccelerated="true"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 
+        <activity android:name=".ui.activity.WebActivity" />
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

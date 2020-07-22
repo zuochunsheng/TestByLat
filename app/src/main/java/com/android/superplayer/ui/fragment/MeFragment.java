@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.android.superplayer.R;
 import com.android.superplayer.base.BaseFragment;
 import com.android.superplayer.config.LogUtil;
+import com.android.superplayer.ui.activity.WebActivity;
 import com.android.superplayer.ui.activity.media.AlivcPlayerActivity;
 import com.android.superplayer.ui.activity.media.MainMediaActivity;
 import com.android.superplayer.ui.activity.my.ExoPlayerActivity;
@@ -80,7 +81,8 @@ public class MeFragment extends BaseFragment {
                 ActivityUtil.getInstance().onNext(this.getActivity(), MainMediaActivity.class);
                 break;
            case R.id.webVideo:
-                ActivityUtil.getInstance().onNext(this.getActivity(), WebVideoActivity.class);
+               // ActivityUtil.getInstance().onNext(this.getActivity(), WebVideoActivity.class);
+                ActivityUtil.getInstance().onNext(this.getActivity(), WebActivity.class);
                 break;
             case R.id.tv_tts: //tts
                 ActivityUtil.getInstance().onNext(this.getActivity(), TTSActivity.class);
