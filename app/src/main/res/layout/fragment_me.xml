@@ -27,6 +27,14 @@
         android:layout_height="44dp"
         android:gravity="center_vertical"
         android:text="tv_exoPlayer播放器" />
+
+    <TextView
+        android:id="@+id/webVideo"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:text="webvidw Video" />
+
     <TextView
         android:id="@+id/tv_goliveTelecast"
         android:layout_width="match_parent"
@@ -48,7 +56,7 @@
         android:gravity="center_vertical"
         android:text="tts" />
 
- <TextView
+    <TextView
         android:id="@+id/tv_tts_xunfei"
         android:layout_width="match_parent"
         android:layout_height="44dp"

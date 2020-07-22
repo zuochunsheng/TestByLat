@@ -172,7 +172,7 @@ public class AlivcPlayerActivity extends AppCompatActivity implements AliyunDown
     /**
      * 判断是不是单集，系列，vip，本地视频，sp是否是vip，sp默认清晰度，sp是否开启硬解，sp 4g下载是否打开,sp是否运营商自动运行
      */
-    private boolean mIsSingle, mIsSerier, mIsVip = false, mIsLocal =true , mSettingSpUtilsVip,
+    private boolean mIsSingle, mIsSerier, mIsVip, mIsLocal , mSettingSpUtilsVip,
             mSettingSpUtilsHardDecoding, mSettingSpUtilsOperatorDownload, mSettingSpUtilsOperatorPlay;
 
     /**
@@ -356,24 +356,24 @@ public class AlivcPlayerActivity extends AppCompatActivity implements AliyunDown
     private void initData() {
         mCoverUrl = mLongVideoBean.getCoverUrl();
         mVideoTitle = mLongVideoBean.getTitle();
-//        judgeVideoType();
-//        List<DotBean> dotList = mLongVideoBean.getDot();
-//        if (dotList != null && dotList.size() > 0) {
-//            mAliyunVodPlayerView.setDotInfo(dotList);
-//        }
-//        mVid = mLongVideoBean.getVideoId();
-//        if(mCurrentLongVideoBean == null){
-//            mCurrentLongVideoBean = new PlayerSimilarSectionBean(mLongVideoBean);
-//        }else{
-//            mCurrentLongVideoBean.setT(mLongVideoBean);
-//        }
+        judgeVideoType();
+        List<DotBean> dotList = mLongVideoBean.getDot();
+        if (dotList != null && dotList.size() > 0) {
+            mAliyunVodPlayerView.setDotInfo(dotList);
+        }
+        mVid = mLongVideoBean.getVideoId();
+        if(mCurrentLongVideoBean == null){
+            mCurrentLongVideoBean = new PlayerSimilarSectionBean(mLongVideoBean);
+        }else{
+            mCurrentLongVideoBean.setT(mLongVideoBean);
+        }
         if (mIsLocal) {
             //本地
             judgeVideoPlayerType();
             UrlSource urlSource = new UrlSource();
-            //urlSource.setUri(mLongVideoBean.getSaveUrl());
+            urlSource.setUri(mLongVideoBean.getSaveUrl());
             //urlSource.setUri(PlayParameter.PLAY_PARAM_URL);
-            urlSource.setUri(PlayParameter.mp4);
+            //urlSource.setUri(PlayParameter.mp4);
             //urlSource.setUri(PlayParameter.url);
             mAliyunVodPlayerView.setLocalSource(urlSource);
             //mAliyunVodPlayerView.changeScreenMode(AliyunScreenMode.Full, false);

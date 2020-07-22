@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.autofocus" /> <!-- 华为手机权限 -->
     <!-- <uses-permission android:name="android.permission.WRITE_CONTACTS" /> -->
     <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
@@ -32,7 +33,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
@@ -53,6 +53,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.nfc.hce" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
 
     <application
         android:name=".application.AndroidApplication"
@@ -160,6 +162,22 @@
             android:exported="false" />
 
         <activity android:name=".ui.activity.media.MainMediaActivity">
+        </activity>
+<!--        兼容视频播放：-->
+        <activity android:name=".ui.activity.my.WebVideoActivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+
+        <activity
+            android:name="com.tencent.smtt.sdk.VideoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:alwaysRetainTaskState="true">
+            <intent-filter>
+                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

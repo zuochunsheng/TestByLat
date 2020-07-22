@@ -19,6 +19,7 @@ import com.android.superplayer.ui.activity.my.LiveTelecastActivity;
 import com.android.superplayer.ui.activity.my.MediaPlayerActivity;
 import com.android.superplayer.ui.activity.my.TTSActivity;
 import com.android.superplayer.ui.activity.my.TtsDemo;
+import com.android.superplayer.ui.activity.my.WebVideoActivity;
 import com.android.superplayer.util.ActivityUtil;
 
 
@@ -58,7 +59,8 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tv_goliveTelecast, R.id.tv_goFFmpeg, R.id.tv_exoPlayer, R.id.tv_goMediaPlay, R.id.tv_tts,R.id.tv_tts_xunfei,R.id.tv_third})
+    @OnClick({R.id.tv_goliveTelecast, R.id.tv_goFFmpeg, R.id.tv_exoPlayer, R.id.tv_goMediaPlay,
+            R.id.tv_tts,R.id.tv_tts_xunfei,R.id.tv_third,R.id.webVideo})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_goMediaPlay://音乐播放器
@@ -76,6 +78,9 @@ public class MeFragment extends BaseFragment {
             case R.id.tv_third: //AlivcPlayerActivity
                // ActivityUtil.getInstance().onNext(this.getActivity(), AlivcPlayerActivity.class);
                 ActivityUtil.getInstance().onNext(this.getActivity(), MainMediaActivity.class);
+                break;
+           case R.id.webVideo:
+                ActivityUtil.getInstance().onNext(this.getActivity(), WebVideoActivity.class);
                 break;
             case R.id.tv_tts: //tts
                 ActivityUtil.getInstance().onNext(this.getActivity(), TTSActivity.class);

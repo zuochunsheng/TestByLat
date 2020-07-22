@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aliyun.player.alivcplayerexpand.bean.LongVideoBean;
+import com.aliyun.player.alivcplayerexpand.constants.PlayParameter;
 import com.aliyun.player.alivcplayerexpand.util.database.DatabaseHelper;
 import com.aliyun.player.alivcplayerexpand.util.database.DatabaseManager;
 import com.aliyun.player.alivcplayerexpand.util.database.LongVideoDatabaseManager;
@@ -77,6 +78,13 @@ public class MainMediaActivity extends BaseActivity {
         Gson gson = new Gson();
 
         LongVideoBean longVideoBean = gson.fromJson(s,LongVideoBean.class) ;
+        //longVideoBean.setVideoId("1185782233162818050");
+        longVideoBean.setVideoId("7464061104150886312");
+
+       // longVideoBean.setSaveUrl(PlayParameter.PLAY_PARAM_URL); //ok
+        //longVideoBean.setSaveUrl(PlayParameter.mp4); //ok
+       // longVideoBean.setSaveUrl(PlayParameter.url);// not
+
         SingleSectionBean bean = new SingleSectionBean(longVideoBean);
 
         AlivcPlayerActivity.startAlivcPlayerActivity(this, bean.t);

@@ -45,7 +45,7 @@ public class PlayParameter {
      */
     //ok
     public static String PLAY_PARAM_URL = "http://player.alicdn.com/video/aliyunmedia.mp4";
-    //net
+    //net  not
     public static  String url = "https://iflow.uc.cn/ucnews/video?app=ucnewsvideo-iflow&aid=6826425571346778896&cid=10016&zzd_from=ucnewsvideo-iflow&uc_param_str=dndsfrvesvntnwpfgibi&recoid=8956383277257216137&rd_type=reco&original_url=http%3A%2F%2Fv.ums.uc.cn%2Fvideo%2Fv_c6a5448cb6e34b64.html&uc_biz_str=S%3Acustom%7CC%3Aiflow_video_hide&ums_id=c6a5448cb6e34b64&activity=1&activity2=1";
 
     //ok
