@@ -113,8 +113,10 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     /**
      * 视频广告
      */
-//    private static final String ADV_VIDEO_URL = "https://alivc-demo-vod.aliyuncs.com/7324abc905c7431f885f168846876dd3/7cd3b03f315f6d40b9323274bfcd7527-fd.mp4";
-    private static final String ADV_VIDEO_URL = "https://alivc-demo-cms.alicdn.com/video/videoAD.mp4";
+      // 抖音 play ok
+    private static final String ADV_VIDEO_URL = "https://alivc-demo-vod.aliyuncs.com/7324abc905c7431f885f168846876dd3/7cd3b03f315f6d40b9323274bfcd7527-fd.mp4";
+    // not
+    //private static final String ADV_VIDEO_URL = "https://alivc-demo-cms.alicdn.com/video/videoAD.mp4";
     /**
      * 广告链接
      */

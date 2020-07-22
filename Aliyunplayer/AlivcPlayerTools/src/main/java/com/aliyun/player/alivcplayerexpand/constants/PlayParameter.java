@@ -43,7 +43,14 @@ public class PlayParameter {
     /**
      * url类型的播放地址, 初始为:http://player.alicdn.com/video/aliyunmedia.mp4
      */
+    //ok
     public static String PLAY_PARAM_URL = "http://player.alicdn.com/video/aliyunmedia.mp4";
+    //net
+    public static  String url = "https://iflow.uc.cn/ucnews/video?app=ucnewsvideo-iflow&aid=6826425571346778896&cid=10016&zzd_from=ucnewsvideo-iflow&uc_param_str=dndsfrvesvntnwpfgibi&recoid=8956383277257216137&rd_type=reco&original_url=http%3A%2F%2Fv.ums.uc.cn%2Fvideo%2Fv_c6a5448cb6e34b64.html&uc_biz_str=S%3Acustom%7CC%3Aiflow_video_hide&ums_id=c6a5448cb6e34b64&activity=1&activity2=1";
+
+    //ok
+    public static  String mp4 = "http://smarticle.video.ums.uc.cn/video/wemedia/7fcb8203c5e041c3bf5c92d546534205/d0746842218427fcb9beecf1760c3c50-3529323208-2-0-2.mp4?auth_key=1595406278-610ac3b3fb6943f3bf3c2a2f8540bbc9-0-3c404294dc11072a25fb34f8e3883b5c";
+
 
     /**
      * 视频可展示的功能
