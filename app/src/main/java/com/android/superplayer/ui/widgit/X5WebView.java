@@ -61,6 +61,21 @@ public class X5WebView extends WebView {
 		// settings 的设计
 	}
 
+	/**
+	 * 这里可以为自定义webview绘制背景或文字
+	 * @param
+	 * @param
+	 * @param
+	 * @return
+	 */
+//	@Override
+//	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+//		boolean ret = super.drawChild(canvas, child, drawingTime);
+//		canvas.save();
+//        ...
+//		return ret;
+//	}
+
 	public X5WebView(Context arg0) {
 		super(arg0);
 		setBackgroundColor(85621);

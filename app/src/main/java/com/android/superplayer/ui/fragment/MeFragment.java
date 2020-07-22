@@ -21,6 +21,7 @@ import com.android.superplayer.ui.activity.my.MediaPlayerActivity;
 import com.android.superplayer.ui.activity.my.TTSActivity;
 import com.android.superplayer.ui.activity.my.TtsDemo;
 import com.android.superplayer.util.ActivityUtil;
+import com.tencent.smtt.sdk.TbsVideo;
 
 
 import butterknife.BindView;
@@ -79,7 +80,10 @@ public class MeFragment extends BaseFragment {
                 break;
            case R.id.webVideo:
                String url = ExoPlayerActivity.url;//ok
+               //String url4 = ExoPlayerActivity.mp4;
+               //startPlay(url4);
                // ActivityUtil.getInstance().onNext(this.getActivity(), WebVideoActivity.class);
+
                 ActivityUtil.getInstance().onNext(this.getActivity(), WebActivity.class);
                 //ActivityUtil.getInstance().onNext(this.getActivity(), BaseTencenWebactivity.class,"url",url);
                 break;
@@ -91,6 +95,17 @@ public class MeFragment extends BaseFragment {
                 break;
 
 
+        }
+    }
+    /**
+     * 直接调用播放视频
+     * @param videoUrl 视频地址
+     */
+    private void startPlay(String videoUrl){
+        //判断当前是否可用
+        if(TbsVideo.canUseTbsPlayer(getActivity().getApplicationContext())){
+            //播放视频
+            TbsVideo.openVideo(getActivity().getApplicationContext(), videoUrl);
         }
     }
 }

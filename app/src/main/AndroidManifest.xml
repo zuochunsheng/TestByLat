@@ -52,11 +52,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.nfc.hce" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
 
-    <!--    硬件加速-->
+    <!--   硬件加速对X5视频播放有利，建议开启-->
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
     <application
@@ -177,6 +176,7 @@
         <activity android:name=".ui.activity.my.BaseTencenWebactivity"
             android:hardwareAccelerated="true"
             android:configChanges="orientation|screenSize|keyboardHidden" />
+
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

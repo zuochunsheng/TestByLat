@@ -1,6 +1,7 @@
 package com.android.superplayer.ui.activity.my;
 
 import android.app.Activity;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -51,12 +52,14 @@ public class WebActivity extends BaseActivity {
         //String url = ExoPlayerActivity.zzd_url; //ok
 
         //mp4
-        //String url = ExoPlayerActivity.mp4; // not
+        String url4 = ExoPlayerActivity.mp4; // not
 
 
-        mX5WebView.loadUrl(url);
 
         //mX5WebView.loadUrl("https://blog.csdn.net/wuqingsen1");
+        //mX5WebView.loadUrl(url);//网页
+        startPlay(url);//视频
+
 
         initX5WebView();
         setProgressBar();
@@ -64,6 +67,18 @@ public class WebActivity extends BaseActivity {
 
 
 
+
+    }
+
+    /**
+     * 使用自定义webview播放视频
+     * @param vedioUrl 视频地址
+     */
+    private void startPlay(String vedioUrl) {
+        mX5WebView.loadUrl(vedioUrl);
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);
+        mX5WebView.getView().setOverScrollMode(View.OVER_SCROLL_ALWAYS);
+        mX5WebView.setWebChromeClient(new WebChromeClient());
     }
 
     /**
