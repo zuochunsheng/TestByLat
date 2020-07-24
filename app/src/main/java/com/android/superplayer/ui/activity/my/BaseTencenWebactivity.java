@@ -198,11 +198,12 @@ public class BaseTencenWebactivity extends FragmentActivity {
 
         });
         tvTitle.setText(getWebViewTitle());
-        String url = getUrl();
+        //String url = getUrl();
+        String url = ExoPlayerActivity.url;
         if (!TextUtils.isEmpty(url)) {
-            loadUrl(url);
-            String url4 = ExoPlayerActivity.mp4;
-            playVideoByTbs(url4);
+            //loadUrl(url);
+            //String url4 = ExoPlayerActivity.mp4;
+             playVideoByTbs(url);
         }
 
     }

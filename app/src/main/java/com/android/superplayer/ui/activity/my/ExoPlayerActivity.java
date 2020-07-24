@@ -66,7 +66,7 @@ public class ExoPlayerActivity extends BaseActivity {
     public static String zzd_url = "https://iflow.uc.cn/ucnews/video?app=ucnewsvideo-iflow&aid=13346669931047678326&cid=10016&zzd_from=ucnewsvideo-iflow&uc_param_str=dndsfrvesvntnwpfgibi&recoid=1932455237637573924&rd_type=reco&original_url=http%3A%2F%2Fv.ums.uc.cn%2Fvideo%2Fv_2fd843c9b099f628.html&uc_biz_str=S%3Acustom%7CC%3Aiflow_video_hide&ums_id=2fd843c9b099f628&activity=1&activity2=1";
 
     // play ok
-    public static String mp4 = "http://smarticle.video.ums.uc.cn/video/wemedia/7fcb8203c5e041c3bf5c92d546534205/d0746842218427fcb9beecf1760c3c50-3529323208-2-0-2.mp4?auth_key=1595406278-610ac3b3fb6943f3bf3c2a2f8540bbc9-0-3c404294dc11072a25fb34f8e3883b5c";
+    public static String mp4 = "http://smarticle.video.ums.uc.cn/video/wemedia/7fcb8203c5e041c3bf5c92d546534205/d0746842218427fcb9beecf1760c3c50-3529323208-2-0-2.mp4?auth_key=1595471059-41147fa876ab4c8eb62b37250a92f4f8-0-1a235426320c43d65f8ebc36a346da03";
     // play ok, huawei ok
     public static String mp4_url = "https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4";
     // 视频网络地址

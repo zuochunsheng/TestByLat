@@ -27,8 +27,8 @@ public class X5WebView extends WebView {
 	};
 
 	@SuppressLint("SetJavaScriptEnabled")
-	public X5WebView(Context arg0, AttributeSet arg1) {
-		super(arg0, arg1);
+	public X5WebView(Context context, AttributeSet arg1) {
+		super(context, arg1);
 		this.setWebViewClient(client);
 		// this.setWebChromeClient(chromeClient);
 		// WebStorage webStorage = WebStorage.getInstance();
@@ -53,7 +53,7 @@ public class X5WebView extends WebView {
 		webSetting.setGeolocationEnabled(true);
 		webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
 		// webSetting.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);
-		webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
+		webSetting.setPluginState(WebSettings.PluginState.ON);
 		// webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
 

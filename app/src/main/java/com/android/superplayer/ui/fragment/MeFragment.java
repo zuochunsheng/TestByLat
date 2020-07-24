@@ -79,13 +79,13 @@ public class MeFragment extends BaseFragment {
                 ActivityUtil.getInstance().onNext(this.getActivity(), MainMediaActivity.class);
                 break;
            case R.id.webVideo:
-               String url = ExoPlayerActivity.url;//ok
+
                //String url4 = ExoPlayerActivity.mp4;
                //startPlay(url4);
                // ActivityUtil.getInstance().onNext(this.getActivity(), WebVideoActivity.class);
 
                 ActivityUtil.getInstance().onNext(this.getActivity(), WebActivity.class);
-                //ActivityUtil.getInstance().onNext(this.getActivity(), BaseTencenWebactivity.class,"url",url);
+                //ActivityUtil.getInstance().onNext(this.getActivity(), BaseTencenWebactivity.class);
                 break;
             case R.id.tv_tts: //tts
                 ActivityUtil.getInstance().onNext(this.getActivity(), TTSActivity.class);

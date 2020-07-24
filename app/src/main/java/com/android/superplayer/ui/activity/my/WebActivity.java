@@ -32,12 +32,6 @@ public class WebActivity extends BaseActivity {
 
     }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        String url = ExoPlayerActivity.url;//ok
-//        playVideoByTbs(url);
-//    }
 
     @Override
     protected void initViewAndData() {
@@ -58,14 +52,12 @@ public class WebActivity extends BaseActivity {
 
         //mX5WebView.loadUrl("https://blog.csdn.net/wuqingsen1");
         //mX5WebView.loadUrl(url);//网页
-        startPlay(url);//视频
+        startPlay(url);//视频  ok
 
 
         initX5WebView();
         setProgressBar();
         setClick();
-
-
 
 
     }
