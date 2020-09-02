@@ -46,13 +46,13 @@ public class WebActivity extends BaseActivity {
         //String url = ExoPlayerActivity.zzd_url; //ok
 
         //mp4
-        String url4 = ExoPlayerActivity.mp4; // not
+        String url4 = ExoPlayerActivity.mp4_url; // not
 
 
 
         //mX5WebView.loadUrl("https://blog.csdn.net/wuqingsen1");
         //mX5WebView.loadUrl(url);//网页
-        startPlay(url);//视频  ok
+        startPlay(url4);//视频  ok
 
 
         initX5WebView();

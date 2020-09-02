@@ -79,11 +79,11 @@ public class MainMediaActivity extends BaseActivity {
 
         LongVideoBean longVideoBean = gson.fromJson(s,LongVideoBean.class) ;
         //longVideoBean.setVideoId("1185782233162818050");
-        longVideoBean.setVideoId("7464061104150886312");
+        //longVideoBean.setVideoId("7464061104150886312");
 
        // longVideoBean.setSaveUrl(PlayParameter.PLAY_PARAM_URL); //ok
-        //longVideoBean.setSaveUrl(PlayParameter.mp4); //ok
-       // longVideoBean.setSaveUrl(PlayParameter.url);// not
+        longVideoBean.setSaveUrl(PlayParameter.mp4); //ok
+        //longVideoBean.setSaveUrl(PlayParameter.url);// not
 
         SingleSectionBean bean = new SingleSectionBean(longVideoBean);
 

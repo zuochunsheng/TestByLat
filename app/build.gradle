@@ -117,6 +117,7 @@ android {
 
         implementation 'com.google.code.gson:gson:2.8.0'//2.8.2
         //implementation 'com.github.arvinljw:SocialHelper:v1.2.0'
+        //讯飞
         implementation files('libs/Msc.jar')
 
 

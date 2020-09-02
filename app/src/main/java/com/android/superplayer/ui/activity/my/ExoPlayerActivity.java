@@ -68,10 +68,10 @@ public class ExoPlayerActivity extends BaseActivity {
     // play ok
     public static String mp4 = "http://smarticle.video.ums.uc.cn/video/wemedia/7fcb8203c5e041c3bf5c92d546534205/d0746842218427fcb9beecf1760c3c50-3529323208-2-0-2.mp4?auth_key=1595471059-41147fa876ab4c8eb62b37250a92f4f8-0-1a235426320c43d65f8ebc36a346da03";
     // play ok, huawei ok
-    public static String mp4_url = "https://storage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%20Hangin'%20with%20the%20Google%20Search%20Bar.mp4";
+    public static String mp4_url = "https://vd3.bdstatic.com/mda-kh5eix59aidwk52n/mda-kh5eix59aidwk52n.mp4";
     // 视频网络地址
     //Uri playerUri = Uri.parse(mp4_url);
-    Uri playerUri = Uri.parse(mp4);
+    Uri playerUri = Uri.parse(mp4_url);
 
     @Override
     protected int getLayoutId() {
