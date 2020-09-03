@@ -16,17 +16,20 @@ import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.WebSocket;
-import rx.functions.Action1;
-import ua.naiksoftware.stomp.LifecycleEvent;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 import ua.naiksoftware.stomp.Stomp;
-import ua.naiksoftware.stomp.client.StompClient;
-import ua.naiksoftware.stomp.client.StompMessage;
+import ua.naiksoftware.stomp.StompClient;
+import ua.naiksoftware.stomp.dto.LifecycleEvent;
+import ua.naiksoftware.stomp.dto.StompMessage;
+
 
 /**
  * @time : 2019/1/22 20:51
  * @author : zcs
- * @description : 跟 CheatActivity 一样的
+ * @description : 跟 CheatActivity 一样的   buyong
  */
 public class StompActivity extends Activity {
 
@@ -58,30 +61,37 @@ public class StompActivity extends Activity {
 
 
     private void connect() {
-        mStompClient = Stomp.over(WebSocket.class, Config.WS_URI);
+        //mStompClient = Stomp.over(WebSocket.class, Config.WS_URI);
+        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, Config.WS_URI);
         mStompClient.connect();
-        mStompClient.lifecycle().subscribe(new Action1<LifecycleEvent>() {
-            @Override
-            public void call(LifecycleEvent lifecycleEvent) {
 
-                //关注lifecycleEvent的回调来决定是否重连
-                switch (lifecycleEvent.getType()) {
-                    case OPENED:
-                        mNeedConnect = false;
-                        Log.d(TAG, "forlan debug stomp connection=========opened");
-                        break;
-                    case ERROR:
-                        mNeedConnect = true;
-                        Log.e(TAG, "forlan debug stomp connection error is ======", lifecycleEvent.getException());
-                        Log.e(TAG, "forlan debug stomp connection error is ======"+lifecycleEvent.getMessage()+",getType :" +lifecycleEvent.getType());
-                        break;
-                    case CLOSED:
-                        mNeedConnect = true;
-                        Log.e(TAG, "forlan debug stomp connection closed======");
-                        break;
-                }
-            }
-        });
+        mStompClient.lifecycle()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LifecycleEvent>() {
+                    @Override
+                    public void accept(LifecycleEvent lifecycleEvent) throws Exception {
+                        switch (lifecycleEvent.getType()) {
+                            case OPENED:
+                                mNeedConnect = false;
+                                Log.e(TAG, "Stomp connection opened");
+                               // toast("连接已开启");
+                                break;
+
+                            case ERROR:
+                                mNeedConnect = true;
+                                Log.e(TAG, "Stomp Error", lifecycleEvent.getException());
+                               // toast("连接出错");
+                                break;
+                            case CLOSED:
+                                mNeedConnect = true;
+                                Log.e(TAG, "Stomp connection closed");
+                               // toast("连接关闭");
+                                break;
+                        }
+                    }
+                });
+
        // registerStompTopic();
     }
 
@@ -104,12 +114,24 @@ public class StompActivity extends Activity {
 
     //点对点订阅，根据用户名来推送消息
     private void registerStompTopic() {
-        mStompClient.topic("user/007JP1358130001/msg").subscribe(new Action1<StompMessage>() {
-            @Override
-            public void call(StompMessage stompMessage) {
-                Log.d(TAG, "forlan debug msg is " + stompMessage.getPayload());
-            }
-        });
+//        mStompClient.topic("user/007JP1358130001/msg")
+//                .subscribe(new Action1<StompMessage>() {
+//            @Override
+//            public void call(StompMessage stompMessage) {
+//                Log.d(TAG, "forlan debug msg is " + stompMessage.getPayload());
+//            }
+//        });
+
+        mStompClient.topic("user/007JP1358130001/msg")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<StompMessage>() {
+                    @Override
+                    public void accept(StompMessage stompMessage) throws Exception {
+                        // {"orderDetails":{"Client9260133611":{"34":{"49":{"price":"10","num":1,"name":"name of 34 49","id":49}}}},"processer":"adfasdfsfsfsdfsfs","notifyText":"","preorderId":"100"}
+                        Log.e(TAG, "forlan debug msg is " + stompMessage.getPayload());
+                    }
+                });
     }
 
     @OnClick(R.id.send)

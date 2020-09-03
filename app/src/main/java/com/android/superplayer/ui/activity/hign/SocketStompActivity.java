@@ -17,14 +17,18 @@ import com.android.superplayer.util.socketutil.WebscoketUtil;
 import com.android.superplayer.util.socketutil.bean.WebSocketBean;
 
 
+import org.reactivestreams.Subscriber;
+
+import io.reactivex.CompletableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.WebSocket;
-import rx.Subscriber;
-import rx.functions.Action1;
-import ua.naiksoftware.stomp.ConnectionProvider;
-import ua.naiksoftware.stomp.LifecycleEvent;
 import ua.naiksoftware.stomp.Stomp;
-import ua.naiksoftware.stomp.client.StompClient;
-import ua.naiksoftware.stomp.client.StompMessage;
+import ua.naiksoftware.stomp.StompClient;
+import ua.naiksoftware.stomp.dto.LifecycleEvent;
+import ua.naiksoftware.stomp.dto.StompMessage;
+
 
 /**
  * @time : 2019/1/22 11:31
@@ -40,11 +44,19 @@ public class SocketStompActivity extends Activity {
     private Button stop;
     private Button send;
     private EditText editText;
-    private Button cheat;
+    //private Button cheat;
     private Button stomp;
 
     private StompClient mStompClient;
     private static final String TAG = "zuo";
+
+    protected CompletableTransformer applySchedulers() {
+        return upstream -> upstream
+                .unsubscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,24 +78,22 @@ public class SocketStompActivity extends Activity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                mStompClient.send("/app/welcome", "{\"name\":\""+editText.getText()+"\"}")
+//                        .compose(applySchedulers())
+//                        .subscribe(() -> {
+//                            Log.d(TAG, "REST echo send successfully");
+//                        }, throwable -> {
+//                            Log.e(TAG, "Error send REST echo", throwable);
+//                            toast(throwable.getMessage());
+//                        });
+
                 mStompClient.send("/app/welcome","{\"name\":\""+editText.getText()+"\"}")
-                        .subscribe(new Subscriber<Void>() {
-                            @Override
-                            public void onCompleted(){
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                e.printStackTrace();
-                                toast("发送错误");
-                            }
-
-                            @Override
-                            public void onNext(Void aVoid) {
-
-                            }
-                        });
+                        .subscribe(() -> {
+                            Log.d(TAG, "REST echo send successfully");
+                        }, throwable -> {
+                            Log.e(TAG, "Error send REST echo", throwable);
+                            toast(throwable.getMessage());
+                        } );
             }
         });
 
@@ -114,7 +124,7 @@ public class SocketStompActivity extends Activity {
         stop = (Button) findViewById(R.id.stop);
         send = (Button) findViewById(R.id.send);
         editText = (EditText) findViewById(R.id.clientMessage);
-        cheat = (Button) findViewById(R.id.cheat);
+       // cheat = (Button) findViewById(R.id.cheat);
         stomp = (Button) findViewById(R.id.stomp);
     }
 
@@ -133,31 +143,34 @@ public class SocketStompActivity extends Activity {
     //创建client 实例
     private void createStompClient() {
 
-        mStompClient = Stomp.over(WebSocket.class, Config.WS_URI);
+        //mStompClient = Stomp.over(WebSocket.class, Config.WS_URI);
 
-        //mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, Config.WS_URI);
+        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, Config.WS_URI);
         mStompClient.connect();
 
-        mStompClient.lifecycle().subscribe(new Action1<LifecycleEvent>() {
-            @Override
-            public void call(LifecycleEvent lifecycleEvent) {
-                switch (lifecycleEvent.getType()) {
-                    case OPENED:
-                        Log.d(TAG, "Stomp connection opened");
-                        toast("连接已开启");
-                        break;
+        mStompClient.lifecycle()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LifecycleEvent>() {
+                    @Override
+                    public void accept(LifecycleEvent lifecycleEvent) throws Exception {
+                        switch (lifecycleEvent.getType()) {
+                            case OPENED:
+                                Log.e(TAG, "Stomp connection opened");
+                                toast("连接已开启");
+                                break;
 
-                    case ERROR:
-                        Log.e(TAG, "Stomp Error", lifecycleEvent.getException());
-                        toast("连接出错");
-                        break;
-                    case CLOSED:
-                        Log.d(TAG, "Stomp connection closed");
-                        toast("连接关闭");
-                        break;
-                }
-            }
-        });
+                            case ERROR:
+                                Log.e(TAG, "Stomp Error", lifecycleEvent.getException());
+                                toast("连接出错");
+                                break;
+                            case CLOSED:
+                                Log.e(TAG, "Stomp connection closed");
+                                toast("连接关闭");
+                                break;
+                        }
+                    }
+                });
 
         WebscoketUtil.init().createConnect();
 
@@ -172,13 +185,19 @@ public class SocketStompActivity extends Activity {
 
     //订阅消息
     private void registerStompTopic() {
-        mStompClient.topic("/topic/getResponse").subscribe(new Action1<StompMessage>() {
-            @Override
-            public void call(StompMessage stompMessage) {
-                Log.e(TAG, "call: " +stompMessage.getPayload() );
-                showMessage(stompMessage);
-            }
-        });
+        mStompClient.topic("/topic/getResponse")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<StompMessage>() {
+                    @Override
+                    public void accept(StompMessage stompMessage) throws Exception {
+                        // {"orderDetails":{"Client9260133611":{"34":{"49":{"price":"10","num":1,"name":"name of 34 49","id":49}}}},"processer":"adfasdfsfsfsdfsfs","notifyText":"","preorderId":"100"}
+                        Log.e(TAG, "forlan debug msg is " + stompMessage.getPayload());
+                        showMessage(stompMessage);
+                    }
+                });
+
+
 
     }
 

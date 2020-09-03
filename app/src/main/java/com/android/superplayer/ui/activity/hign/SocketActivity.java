@@ -36,6 +36,7 @@ import butterknife.OnClick;
  * @time : 2019/1/22 10:42
  * @author : zcs
  * @description : 1 实现tcp链接，把手机当做服务器跟客户端的综合体，可以不需要外网服务器，只需要手机连接wifi即可
+ *
  */
 public class SocketActivity extends Activity {
 
@@ -53,8 +54,8 @@ public class SocketActivity extends Activity {
     @BindView(R.id.tv_client)
     TextView tvClient;
 
-    public static final String IP_ADDR = "https://ops.ledcas.com/os-transaction/messages";//服务器地址
-    public static final int PORT = 443;//服务器端口号
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,7 @@ public class SocketActivity extends Activity {
                 //连接服务器
                 Log.e("tcp" ,"ip地址:" + getIPAddress(getApplicationContext()));
                 TcpClient.startClient( getIPAddress(getApplicationContext()) , 8080);//ip地址:192.168.232.2
-               // TcpClient.startClient( IP_ADDR , PORT);
+                //TcpClient.startClient( TcpClient.WS_URI , TcpClient.PORT);
                 break;
             case R.id.btn_send_client:
                 //发送数据给客户端

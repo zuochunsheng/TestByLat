@@ -18,8 +18,10 @@ import java.net.Socket;
  */
 public class TcpClient {
 
-    public static final String IP_ADDR = "https://ops.ledcas.com/os-transaction/messages";//服务器地址
+
+    public static final String WS_URI = "https://ops.ledcas.com/oss-transaction/messages";//peter  测试
     public static final int PORT = 80;//服务器端口号
+    //public static final int PORT = 443;//服务器端口号
 
 
     public static Socket socket;

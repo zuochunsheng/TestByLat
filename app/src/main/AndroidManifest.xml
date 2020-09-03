@@ -117,10 +117,7 @@
         <!-- 仿网易云 tab -->
         <activity android:name=".ui.activity.test.ViewPageIndicatorActivity">
 
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+
         </activity>
         <!-- ﻿悬浮在整个app 上的按钮 -->
         <!-- ﻿上下滚动的TextView -->
@@ -144,12 +141,20 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ui.activity.hign.SocketActivity">
-        </activity>
+
         <!-- socket -->
         <activity android:name=".ui.activity.hign.SocketStompActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.hign.SocketActivity">
+
         </activity>
         <activity android:name=".ui.activity.hign.StompActivity" />
+
+
         <activity android:name=".ui.activity.my.TtsDemo" />
         <activity
             android:name=".ui.activity.media.AlivcPlayerActivity"
