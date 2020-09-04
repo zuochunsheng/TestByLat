@@ -29,7 +29,8 @@ import ua.naiksoftware.stomp.dto.StompMessage;
 /**
  * @time : 2019/1/22 20:51
  * @author : zcs
- * @description : 跟 CheatActivity 一样的   buyong
+ * @description : 跟 CheatActivity 一样的
+ * buyong
  */
 public class StompActivity extends Activity {
 
@@ -92,7 +93,7 @@ public class StompActivity extends Activity {
                     }
                 });
 
-       // registerStompTopic();
+        registerStompTopic();
     }
 
     //创建长连接，服务器端没有心跳机制的情况下，启动timer来检查长连接是否断开，如果断开就执行重连
@@ -114,22 +115,17 @@ public class StompActivity extends Activity {
 
     //点对点订阅，根据用户名来推送消息
     private void registerStompTopic() {
-//        mStompClient.topic("user/007JP1358130001/msg")
-//                .subscribe(new Action1<StompMessage>() {
-//            @Override
-//            public void call(StompMessage stompMessage) {
-//                Log.d(TAG, "forlan debug msg is " + stompMessage.getPayload());
-//            }
-//        });
-
-        mStompClient.topic("user/007JP1358130001/msg")
+        String mid = "007JP1358130001";
+        mStompClient.topic("/topic/foodorder-merchant-" + mid )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<StompMessage>() {
                     @Override
                     public void accept(StompMessage stompMessage) throws Exception {
                         // {"orderDetails":{"Client9260133611":{"34":{"49":{"price":"10","num":1,"name":"name of 34 49","id":49}}}},"processer":"adfasdfsfsfsdfsfs","notifyText":"","preorderId":"100"}
-                        Log.e(TAG, "forlan debug msg is " + stompMessage.getPayload());
+                        //LogUtil.e("stompMessage",stompMessage);
+                        Log.e(TAG, "stompMessage = " + stompMessage.getPayload());
+                        //showMessage(stompMessage);
                     }
                 });
     }

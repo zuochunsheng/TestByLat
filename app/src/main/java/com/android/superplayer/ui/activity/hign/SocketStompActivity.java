@@ -41,6 +41,7 @@ public class SocketStompActivity extends Activity {
 
     private TextView serverMessage;
     private Button start;
+    private Button register;
     private Button stop;
     private Button send;
     private EditText editText;
@@ -48,7 +49,7 @@ public class SocketStompActivity extends Activity {
     private Button stomp;
 
     private StompClient mStompClient;
-    private static final String TAG = "zuo";
+    private static final String TAG = "stomp";
 
     protected CompletableTransformer applySchedulers() {
         return upstream -> upstream
@@ -70,8 +71,13 @@ public class SocketStompActivity extends Activity {
             public void onClick(View v) {
                 //创建client 实例
                 createStompClient();
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 //订阅消息
-                //registerStompTopic();
+                registerStompTopic();
             }
         });
 
@@ -121,6 +127,7 @@ public class SocketStompActivity extends Activity {
     private void bindView() {
         serverMessage = (TextView) findViewById(R.id.serverMessage);
         start = (Button) findViewById(R.id.start);
+        register = (Button) findViewById(R.id.register);
         stop = (Button) findViewById(R.id.stop);
         send = (Button) findViewById(R.id.send);
         editText = (EditText) findViewById(R.id.clientMessage);
@@ -142,9 +149,7 @@ public class SocketStompActivity extends Activity {
 
     //创建client 实例
     private void createStompClient() {
-
-        //mStompClient = Stomp.over(WebSocket.class, Config.WS_URI);
-
+        LogUtil.e("stomp","createStompClient");
         mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, Config.WS_URI);
         mStompClient.connect();
 
@@ -159,7 +164,6 @@ public class SocketStompActivity extends Activity {
                                 Log.e(TAG, "Stomp connection opened");
                                 toast("连接已开启");
                                 break;
-
                             case ERROR:
                                 Log.e(TAG, "Stomp Error", lifecycleEvent.getException());
                                 toast("连接出错");
@@ -168,35 +172,42 @@ public class SocketStompActivity extends Activity {
                                 Log.e(TAG, "Stomp connection closed");
                                 toast("连接关闭");
                                 break;
+                            case FAILED_SERVER_HEARTBEAT:
+                                Log.e(TAG, "Stomp FAILED_SERVER_HEARTBEAT");
+                                toast("FAILED_SERVER_HEARTBEAT");
+                                break;
                         }
                     }
                 });
 
-        WebscoketUtil.init().createConnect();
-
-        WebscoketUtil.init().registerCallback(new WebscoketUtil.Callback() {
-            @Override
-            public void onGetNewMessage(WebSocketBean socketBean) {
-                LogUtil.e("");
-            }
-        });
+//        WebscoketUtil.init().createConnect();
+//
+//        WebscoketUtil.init().registerCallback(new WebscoketUtil.Callback() {
+//            @Override
+//            public void onGetNewMessage(WebSocketBean socketBean) {
+//                LogUtil.e("registerCallback");
+//            }
+//        });
 
     }
 
     //订阅消息
     private void registerStompTopic() {
-        mStompClient.topic("/topic/getResponse")
+        //多次订阅
+        LogUtil.e(TAG,"registerStompTopic");
+        String mid = "007JP1358130001";
+        mStompClient.topic("/topic/foodorder-merchant-" + mid )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<StompMessage>() {
                     @Override
                     public void accept(StompMessage stompMessage) throws Exception {
                         // {"orderDetails":{"Client9260133611":{"34":{"49":{"price":"10","num":1,"name":"name of 34 49","id":49}}}},"processer":"adfasdfsfsfsdfsfs","notifyText":"","preorderId":"100"}
-                        Log.e(TAG, "forlan debug msg is " + stompMessage.getPayload());
-                        showMessage(stompMessage);
+                        //LogUtil.e("stompMessage",stompMessage);
+                        Log.e(TAG, "stompMessage = " + stompMessage.getPayload());
+                        //showMessage(stompMessage);
                     }
                 });
-
 
 
     }

@@ -36,7 +36,7 @@ import butterknife.OnClick;
  * @time : 2019/1/22 10:42
  * @author : zcs
  * @description : 1 实现tcp链接，把手机当做服务器跟客户端的综合体，可以不需要外网服务器，只需要手机连接wifi即可
- *
+ *  buyong
  */
 public class SocketActivity extends Activity {
 
