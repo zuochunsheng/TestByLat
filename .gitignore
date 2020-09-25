@@ -6,6 +6,8 @@
 /captures
 .externalNativeBuild
 .idea/*
-/AliyunVideoCommon/build/.*
+/AliyunVideoCommon/build/*
 /Aliyunplayer/AlivcPlayerTools/build/*
+
+
 
