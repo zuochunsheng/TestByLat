@@ -100,6 +100,10 @@
         </activity>
         <!-- 测试生命周期 -->
         <activity android:name=".ui.activity.test.StringTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity> <!-- glide -->
         <activity android:name=".ui.activity.test.BActivity" />
         <!-- rx语法 -->
@@ -144,10 +148,7 @@
 
         <!-- socket -->
         <activity android:name=".ui.activity.hign.SocketStompActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ui.activity.hign.SocketActivity">
 

@@ -1,6 +1,7 @@
 package com.android.superplayer.ui.activity.test;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -19,8 +20,7 @@ public class StringTestActivity extends Activity {
 
     @BindString(R.string.app_name)
     String app_name;
-
-
+    private Dialog dialog;
 
 
     @Override
@@ -32,6 +32,8 @@ public class StringTestActivity extends Activity {
 
 
         TextView textView1 = (TextView) findViewById(R.id.textView);
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
+        TextView textView3 = (TextView) findViewById(R.id.textView3);
         //textView.setText("text----1");
 
         //LogUtil.e("需要注解当前的布局 app_name =" + app_name);
@@ -41,6 +43,39 @@ public class StringTestActivity extends Activity {
             @Override
             public void onClick(View v) {
                 ActivityUtil.getInstance().onNext(StringTestActivity.this, BActivity.class);
+            }
+        });
+
+        textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dialog != null){
+                    dialog.dismiss();
+                    dialog = null;
+                }
+                dialog = new Dialog(StringTestActivity.this);
+                View view = View.inflate(StringTestActivity.this, R.layout.item_message, null);
+                dialog.setContentView(view);
+
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        ActivityUtil.getInstance().onNext(StringTestActivity.this, BActivity.class);
+                    }
+                });
+
+                dialog.show();
+
+            }
+        });
+        textView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dialog != null){
+                    dialog.dismiss();
+                    dialog = null;
+                }
             }
         });
 
