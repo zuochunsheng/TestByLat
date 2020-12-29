@@ -4,11 +4,15 @@ buildscript {
 
     apply from: 'thirdparty-lib/config.gradle'
     repositories {
-        maven { url "https://maven.google.com" }
+        mavenCentral()
+        jcenter()
+
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+        //maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         maven { url "https://stomp.github.io" }
         google()
-        jcenter()
 
         maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
         maven { url 'http://4thline.org/m2' }
@@ -24,21 +28,18 @@ buildscript {
 
 allprojects {
     repositories {
+
+        mavenCentral()
+        jcenter()
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
-        maven { url "https://maven.google.com" }
+        //maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         maven { url "https://stomp.github.io" }
         google()
-        jcenter()
-
-        mavenCentral()
-
         maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
         //maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'http://4thline.org/m2' }
-        //maven { url 'http://repo1.maven.org/maven2' }
-        //flatDir { dirs 'src/main/libs' }
     }
 }
 
