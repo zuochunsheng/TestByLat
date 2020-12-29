@@ -53,7 +53,7 @@ public class StringTestActivity extends Activity {
                     dialog.dismiss();
                     dialog = null;
                 }
-                dialog = new Dialog(StringTestActivity.this);
+                dialog = new Dialog(StringTestActivity.this,R.style.Dialog_Fullscreen);
                 View view = View.inflate(StringTestActivity.this, R.layout.item_message, null);
                 dialog.setContentView(view);
 
@@ -65,6 +65,8 @@ public class StringTestActivity extends Activity {
                     }
                 });
 
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.setCancelable(false);
                 dialog.show();
 
             }
@@ -72,10 +74,7 @@ public class StringTestActivity extends Activity {
         textView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dialog != null){
-                    dialog.dismiss();
-                    dialog = null;
-                }
+                ActivityUtil.getInstance().onNext(StringTestActivity.this, StringTestActivity.class);
             }
         });
 

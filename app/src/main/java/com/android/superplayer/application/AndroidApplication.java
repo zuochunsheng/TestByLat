@@ -149,7 +149,7 @@ public class AndroidApplication extends Application {
 
             @Override
             public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
+                //LogUtil.e(TAG,"onActivitySaveInstanceState  " + activity.getClass().getSimpleName());
             }
 
             @Override
